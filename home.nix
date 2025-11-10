@@ -34,6 +34,7 @@ in
 
   home.packages = with pkgs; [
     alacritty
+    google-chrome
   ];
 
 }
