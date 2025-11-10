@@ -23,7 +23,11 @@ in
       	'';
   };
   programs.firefox.enable = true;
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "FranBec";
+    userEmail = "franbecvort@gmail.com";
+  };
 
   xdg.configFile = builtins.mapAttrs
     (name: subpath: {
