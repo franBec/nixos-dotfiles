@@ -3,9 +3,7 @@
 let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
-  configs = {
-    alacritty = "alacritty";
-  };
+  configs = {};
 in
 
 {
@@ -37,8 +35,15 @@ in
     configs;
 
   home.packages = with pkgs; [
-    alacritty
+    bat
+    freshfetch
     google-chrome
+    htop
+    kitty
+    rofi
+    sublime3
+    tree
+    xclip
   ];
 
 }

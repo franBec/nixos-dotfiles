@@ -31,8 +31,17 @@
 
   services.xserver.enable = true;
 
+  hardware.cpu.intel.updateMicrocode = true;
+  services.xserver.videoDrivers = [ "intel" ];
+  zramSwap.enable = true;
+
+  hardware.opengl.enable = true;
+  hardware.opengl.extraPackages = with pkgs; [
+    intel-media-driver
+  ];
+
   services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services.desktopManager.cinnamon.enable = true;
 
   services.xserver.xkb = {
     layout = "us";
