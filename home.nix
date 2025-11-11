@@ -11,18 +11,18 @@ in
   home.homeDirectory = "/home/pollito";
   home.stateVersion = "25.05";
 
-  programs.bash = {
+  programs.zsh = {
     enable = true;
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
     };
     initExtra = ''
           freshfetch
-          export PS1="\[\e[38;5;75m\]\u@\h \[\e[38;5;113m\]\w \[\e[38;5;189m\]\$ \[\e[0m\]"
           debuginfo() {
               local LOG_FILE="$HOME/nixos-debug-info.log"
               (
                   printf "SECTION: FRESHFETCH INFO\n"
+                  # Note: freshfetch must be in $PATH (it is, via home.packages)
                   freshfetch
                   printf "\nSECTION: SESSION TYPE\n"
                   echo "XDG_SESSION_TYPE: $XDG_SESSION_TYPE"
@@ -38,11 +38,33 @@ in
           }
         '';
   };
+  home.sessionVariables.SHELL = "${pkgs.zsh}/bin/zsh";
+
   programs.firefox.enable = true;
   programs.git = {
     enable = true;
     userName = "FranBec";
     userEmail = "franbecvort@gmail.com";
+  };
+  programs.starship = {
+    enable = true;
+    settings = {
+      format = "$username@$hostname $directory $character";
+      username = {
+        style_user = "bold blue";
+        show_always = true;
+      };
+      hostname = {
+        style = "bold blue";
+      };
+      directory = {
+        style = "bold yellow";
+      };
+      character = {
+        success_symbol = "[\\$](bold cyan)";
+        error_symbol = "[\\$](bold red)";
+      };
+    };
   };
 
   xdg.configFile = builtins.mapAttrs
@@ -53,14 +75,16 @@ in
     configs;
 
   home.packages = with pkgs; [
+    alacritty
     bat
     freshfetch
     google-chrome
     htop
-    ghostty
+    starship
     sublime3
     tree
     wl-clipboard
+    zsh
   ];
 
 }
