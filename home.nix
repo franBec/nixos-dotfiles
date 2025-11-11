@@ -17,8 +17,8 @@ in
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
     };
     initExtra = ''
-      	  export PS1="\[\e[38;5;75m\]\u@\h \[\e[38;5;113m\]\w \[\e[38;5;189m\]\$ \[\e[0m\]"
-      	'';
+          export PS1="\[\e[38;5;75m\]\u@\h \[\e[38;5;113m\]\w \[\e[38;5;189m\]\$ \[\e[0m\]"
+        '';
   };
   programs.firefox.enable = true;
   programs.git = {
@@ -39,11 +39,11 @@ in
     freshfetch
     google-chrome
     htop
-    kitty
+    ghostty
     rofi
     sublime3
     tree
-    xclip
+    wl-clipboard
   ];
 
 }

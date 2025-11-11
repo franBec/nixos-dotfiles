@@ -11,6 +11,12 @@
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
+  networking.nameservers = [
+    "1.1.1.1"   # Cloudflare Primary
+    "1.0.0.1"   # Cloudflare Secondary
+    "8.8.8.8"   # Google DNS (as a backup check)
+  ];
+  networking.networkmanager.dns = "none"; # Tell NetworkManager to ignore DNS servers learned via DHCP/DHCPv6 and only use the static list defined above.
 
   time.timeZone = "Europe/Lisbon";
 
@@ -30,18 +36,7 @@
   security.rtkit.enable = true;
 
   services.xserver.enable = true;
-
-  hardware.cpu.intel.updateMicrocode = true;
-  services.xserver.videoDrivers = [ "intel" ];
-  zramSwap.enable = true;
-
-  hardware.opengl.enable = true;
-  hardware.opengl.extraPackages = with pkgs; [
-    intel-media-driver
-  ];
-
-  services.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.cinnamon.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   services.xserver.xkb = {
     layout = "us";
@@ -57,6 +52,8 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
+  home-manager.backupFileExtension = "backup";
 
   users.users.pollito = {
     isNormalUser = true;
