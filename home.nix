@@ -56,7 +56,6 @@ in
     google-chrome
     htop
     ghostty
-    kitty
     sublime3
     tree
     wl-clipboard
