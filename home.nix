@@ -15,11 +15,25 @@ in
     enable = true;
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
-      debuginfo = "( printf '\\n--- FRESHFETCH INFO ---\\n' ; freshfetch ; printf '\\n--- CONFIGURATION.NIX ---\\n' ; cat ~/nixos-dotfiles/configuration.nix ; printf '\\n--- FLAKE.NIX ---\\n' ; cat ~/nixos-dotfiles/flake.nix ; printf '\\n--- HOME.NIX ---\\n' ; cat ~/nixos-dotfiles/home.nix ) | wl-copy";
     };
     initExtra = ''
           freshfetch
           export PS1="\[\e[38;5;75m\]\u@\h \[\e[38;5;113m\]\w \[\e[38;5;189m\]\$ \[\e[0m\]"
+          debuginfo() {
+              local LOG_FILE="$HOME/nixos-debug-info.log"
+              (
+                  printf "SECTION: FRESHFETCH INFO\n"
+                  freshfetch
+                  printf "\nSECTION: CONFIGURATION.NIX (~/nixos-dotfiles/configuration.nix)\n"
+                  cat ~/nixos-dotfiles/configuration.nix
+                  printf "\nSECTION: FLAKE.NIX (~/nixos-dotfiles/flake.nix)\n"
+                  cat ~/nixos-dotfiles/flake.nix
+                  printf "\nSECTION: HOME.NIX (~/nixos-dotfiles/home.nix)\n"
+                  cat ~/nixos-dotfiles/home.nix
+              ) > "$LOG_FILE"
+              echo "Configuration data successfully exported to $LOG_FILE"
+              echo "Use 'cat $LOG_FILE' or 'bat $LOG_FILE' to view."
+          }
         '';
   };
   programs.firefox.enable = true;
