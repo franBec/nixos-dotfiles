@@ -15,8 +15,7 @@ in
     enable = true;
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
-      debuginfo = "( printf '\\n--- FRESHFETCH INFO ---\\n' && freshfetch && printf '\\n--- CONFIGURATION.NIX ---\\n' && cat ~/nixos-dotfiles/configuration.nix && printf '\\n--- FLAKE.NIX ---\\n' && cat ~/nixos-dotfiles/flake.nix && printf '\\n--- HOME.NIX ---\\n' && cat ~/nixos-dotfiles/home.nix ) | wl-copy";
-
+      debuginfo = "( printf '\\n--- FRESHFETCH INFO ---\\n' ; freshfetch ; printf '\\n--- CONFIGURATION.NIX ---\\n' ; cat ~/nixos-dotfiles/configuration.nix ; printf '\\n--- FLAKE.NIX ---\\n' ; cat ~/nixos-dotfiles/flake.nix ; printf '\\n--- HOME.NIX ---\\n' ; cat ~/nixos-dotfiles/home.nix ) | wl-copy";
     };
     initExtra = ''
           freshfetch
