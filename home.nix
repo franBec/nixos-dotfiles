@@ -24,6 +24,8 @@ in
               (
                   printf "SECTION: FRESHFETCH INFO\n"
                   freshfetch
+                  printf "\nSECTION: SESSION TYPE\n"
+                  echo "XDG_SESSION_TYPE: $XDG_SESSION_TYPE"
                   printf "\nSECTION: CONFIGURATION.NIX (~/nixos-dotfiles/configuration.nix)\n"
                   cat ~/nixos-dotfiles/configuration.nix
                   printf "\nSECTION: FLAKE.NIX (~/nixos-dotfiles/flake.nix)\n"
