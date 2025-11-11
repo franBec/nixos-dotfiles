@@ -56,7 +56,6 @@ in
     google-chrome
     htop
     ghostty
-    rofi
     sublime3
     tree
     wl-clipboard
