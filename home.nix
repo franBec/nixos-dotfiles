@@ -15,12 +15,10 @@ in
   # -------------------------------------------------------------------
 
   home.file = {
-    # Symlink ~/.zshrc to the external zsh configuration file
     ".zshrc" = {
       source = create_symlink "${dotfiles}/zsh/.zshrc";
       recursive = false;
     };
-    # Symlink ~/.gitconfig to the external git configuration file
     ".gitconfig" = {
       source = create_symlink "${dotfiles}/git/.gitconfig";
       recursive = false;
@@ -31,14 +29,11 @@ in
   # 2. XDG Configuration Files (Symlinks to ~/.config)
   # -------------------------------------------------------------------
 
-  # Expanded xdg.configFile block for Alacritty and Starship
   xdg.configFile = {
-    # Alacritty (Symlink ~/.config/alacritty/alacritty.toml)
     alacritty = {
       source = create_symlink "${dotfiles}/alacritty";
       recursive = true;
     };
-    # Starship (Symlink ~/.config/starship.toml)
     "starship.toml" = {
       source = create_symlink "${dotfiles}/starship.toml";
       recursive = false;
@@ -76,7 +71,7 @@ in
     alacritty
     bat
     freshfetch
-    gnome-terminal
+    gnome-terminal # It is really needed if already have alacritty?
     google-chrome
     htop
     nemo

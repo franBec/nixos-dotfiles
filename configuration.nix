@@ -16,7 +16,7 @@
     "1.0.0.1"   # Cloudflare Secondary
     "8.8.8.8"   # Google DNS (as a backup check)
   ];
-  networking.networkmanager.dns = "none"; # Tell NetworkManager to ignore DNS servers learned via DHCP/DHCPv6 and only use the static list defined above.
+  networking.networkmanager.dns = "none"; # Tells networkmanager to only use the static list defined above
 
   time.timeZone = "Europe/Lisbon";
 
@@ -56,7 +56,6 @@
 
   programs.dconf.enable = true;
 
-  home-manager.backupFileExtension = "backup";
   programs.zsh.enable = true;
 
   users.users.pollito = {
@@ -64,7 +63,6 @@
     description = "pollito";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh; 
-
   };
 
 
