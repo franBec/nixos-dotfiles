@@ -10,6 +10,10 @@ in
   home.homeDirectory = "/home/pollito";
   home.stateVersion = "25.05";
 
+  imports = [
+    ./home-modules/development.nix
+  ]
+
   # -------------------------------------------------------------------
   # 1. Standard Dotfiles (Direct Symlinks to $HOME)
   # -------------------------------------------------------------------
