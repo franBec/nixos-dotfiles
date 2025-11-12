@@ -1,5 +1,9 @@
 [window]
-opacity=0.9
+opacity=0.8
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font Propo", style = "Regular" }
+size = 12
 
 [colors.primary]
 foreground = "#cdd6f4"

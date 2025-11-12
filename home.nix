@@ -24,7 +24,6 @@ in
               local LOG_FILE="$HOME/nixos-debug-info.log"
               (
                   printf "SECTION: FRESHFETCH INFO\n"
-                  # Note: freshfetch must be in $PATH (it is, via home.packages)
                   freshfetch
                   printf "\nSECTION: SESSION TYPE\n"
                   echo "XDG_SESSION_TYPE: $XDG_SESSION_TYPE"
