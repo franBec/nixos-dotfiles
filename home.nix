@@ -12,7 +12,7 @@ in
 
   imports = [
     ./home-modules/development.nix
-  ]
+  ];
 
   # -------------------------------------------------------------------
   # 1. Standard Dotfiles (Direct Symlinks to $HOME)
