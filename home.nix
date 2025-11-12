@@ -71,7 +71,7 @@ in
     starship
     sublime3
     tree
-    wl-clipboard
+    xclip
     zsh
   ];
   
