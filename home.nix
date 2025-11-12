@@ -57,7 +57,7 @@ in
   programs.starship.enable = true;
   programs.ssh = {
     enable = true;
-    startAgent = true;
+    enableAgent = true;
     
     # Optional: Configure host-specific settings
     matchBlocks = {
