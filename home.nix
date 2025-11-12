@@ -71,7 +71,6 @@ in
     alacritty
     bat
     freshfetch
-    gnome-terminal # It is really needed if already have alacritty?
     google-chrome
     htop
     nemo
