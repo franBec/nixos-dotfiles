@@ -63,11 +63,11 @@ in
   home.packages = with pkgs; [
     alacritty
     bat
-    cinnamon.nemo
     freshfetch
     gnome-terminal
     google-chrome
     htop
+    nemo
     starship
     sublime3
     tree
