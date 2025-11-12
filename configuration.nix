@@ -39,7 +39,8 @@
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
   services.xserver.xkb = {
-    layout = "us";
+    layouts = [ "us" "latam" ];
+    options = "grp:win_space_toggle";
     variant = "";
   };
 

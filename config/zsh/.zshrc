@@ -1,7 +1,7 @@
 # This file is symlinked from home-manager
 alias nrs="sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos"
 freshfetch
-debuginfo() {
+nixosInfo() {
     local LOG_FILE="$HOME/nixos-debug-info.log"
     (
         printf "SECTION: FRESHFETCH INFO\n"
