@@ -63,9 +63,9 @@ in
   home.packages = with pkgs; [
     alacritty
     bat
+    cinnamon.nemo
     freshfetch
     gnome-terminal
-    gnome.nemo
     google-chrome
     htop
     starship
