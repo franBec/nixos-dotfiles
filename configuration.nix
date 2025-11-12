@@ -36,12 +36,12 @@
   security.rtkit.enable = true;
 
   services.xserver.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.desktopManager.cinnamon.enable = true;
   services.displayManager.sddm = {
     enable = true;
     theme = "breeze"; 
   };
-
   services.xserver.xkb = {
     layout = "us";
     variant = "";
@@ -57,6 +57,8 @@
     pulse.enable = true;
   };
 
+  programs.dconf.enable = true;
+
   home-manager.backupFileExtension = "backup";
   programs.zsh.enable = true;
 
@@ -64,9 +66,6 @@
     isNormalUser = true;
     description = "pollito";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    ];
     shell = pkgs.zsh; 
 
   };

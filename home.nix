@@ -64,6 +64,8 @@ in
     alacritty
     bat
     freshfetch
+    gnome.gnome-terminal
+    gnome.nemo
     google-chrome
     htop
     starship
