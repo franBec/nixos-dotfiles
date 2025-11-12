@@ -38,10 +38,6 @@
   services.xserver.enable = true;
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
-  services.displayManager.sddm = {
-    enable = true;
-    theme = "breeze"; 
-  };
   services.xserver.xkb = {
     layout = "us";
     variant = "";
