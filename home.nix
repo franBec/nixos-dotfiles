@@ -3,9 +3,6 @@
 let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
-  configs = {
-    alacritty = "alacritty";
-  };
 in
 
 {
@@ -13,68 +10,56 @@ in
   home.homeDirectory = "/home/pollito";
   home.stateVersion = "25.05";
 
-  programs.zsh = {
-    enable = true;
-    shellAliases = {
-      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
+  # -------------------------------------------------------------------
+  # 1. Standard Dotfiles (Direct Symlinks to $HOME)
+  # -------------------------------------------------------------------
+
+  home.file = {
+    # Symlink ~/.zshrc to the external zsh configuration file
+    ".zshrc" = {
+      source = create_symlink "${dotfiles}/zsh/.zshrc";
+      recursive = false;
     };
-    initContent = ''
-          freshfetch
-          debuginfo() {
-              local LOG_FILE="$HOME/nixos-debug-info.log"
-              (
-                  printf "SECTION: FRESHFETCH INFO\n"
-                  freshfetch
-                  printf "\nSECTION: SESSION TYPE\n"
-                  echo "XDG_SESSION_TYPE: $XDG_SESSION_TYPE"
-                  printf "\nSECTION: CONFIGURATION.NIX (~/nixos-dotfiles/configuration.nix)\n"
-                  cat ~/nixos-dotfiles/configuration.nix
-                  printf "\nSECTION: FLAKE.NIX (~/nixos-dotfiles/flake.nix)\n"
-                  cat ~/nixos-dotfiles/flake.nix
-                  printf "\nSECTION: HOME.NIX (~/nixos-dotfiles/home.nix)\n"
-                  cat ~/nixos-dotfiles/home.nix
-              ) > "$LOG_FILE"
-              echo "Configuration data successfully exported to $LOG_FILE"
-              echo "Use 'cat $LOG_FILE' or 'bat $LOG_FILE' to view."
-          }
-        '';
+    # Symlink ~/.gitconfig to the external git configuration file
+    ".gitconfig" = {
+      source = create_symlink "${dotfiles}/git/.gitconfig";
+      recursive = false;
+    };
   };
+
+  # -------------------------------------------------------------------
+  # 2. XDG Configuration Files (Symlinks to ~/.config)
+  # -------------------------------------------------------------------
+
+  # Expanded xdg.configFile block for Alacritty and Starship
+  xdg.configFile = {
+    # Alacritty (Existing directory setup)
+    alacritty = {
+      source = create_symlink "${dotfiles}/alacritty";
+      recursive = true;
+    };
+    # Starship (Symlink ~/.config/starship.toml)
+    "starship.toml" = {
+      source = create_symlink "${dotfiles}/starship.toml";
+      recursive = false;
+    };
+  };
+
+  # -------------------------------------------------------------------
+  # 3. Program Enables
+  # -------------------------------------------------------------------
+
+  programs.zsh.enable = true;
   home.sessionVariables.SHELL = "${pkgs.zsh}/bin/zsh";
 
   programs.firefox.enable = true;
-  programs.git = {
-    enable = true;
-    userName = "FranBec";
-    userEmail = "franbecvort@gmail.com";
-  };
-  programs.starship = {
-    enable = true;
-    settings = {
-      format = "$username@$hostname $directory $character";
-      username = {
-        style_user = "bold blue";
-        show_always = true;
-      };
-      hostname = {
-        style = "bold blue";
-      };
-      directory = {
-        style = "bold yellow";
-      };
-      character = {
-        success_symbol = "[\\$](bold cyan)";
-        error_symbol = "[\\$](bold red)";
-      };
-    };
-  };
+  programs.git.enable = true;
+  programs.starship.enable = true;
 
-  xdg.configFile = builtins.mapAttrs
-    (name: subpath: {
-      source = create_symlink "${dotfiles}/${subpath}";
-      recursive = true;
-    })
-    configs;
-
+  # -------------------------------------------------------------------
+  # 4. Packages
+  # -------------------------------------------------------------------
+  
   home.packages = with pkgs; [
     alacritty
     bat
@@ -87,5 +72,5 @@ in
     wl-clipboard
     zsh
   ];
-
+  
 }

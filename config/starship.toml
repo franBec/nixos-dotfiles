@@ -1,0 +1,15 @@
+format = "$username@$hostname $directory $character"
+
+[username]
+style_user = "bold blue"
+show_always = true
+
+[hostname]
+style = "bold blue"
+
+[directory]
+style = "bold yellow"
+
+[character]
+success_symbol = "[\\$](bold cyan)"
+error_symbol = "[\\$](bold red)"
