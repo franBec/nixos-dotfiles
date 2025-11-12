@@ -1,6 +1,7 @@
 # This file is symlinked from home-manager
 alias nrs="sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos"
 freshfetch
+eval "$(${pkgs.starship}/bin/starship init zsh)"
 nixosInfo() {
     local LOG_FILE="$HOME/nixos-debug-info.log"
     (
