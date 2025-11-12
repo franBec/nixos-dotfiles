@@ -4,8 +4,9 @@
     git
   ];
 
-  xdg.configFile.".gitconfig" = {
-    source = ./.gitconfig;
-    target = ".gitconfig";
+  programs.git = {
+    enable = true;
+    userName = "FranBec";
+    userEmail = "franbecvort@gmail.com";
   };
 }

@@ -1,13 +1,7 @@
 { pkgs, config, ... }:
 {
-  home.packages = with pkgs; [
-    alacritty
-  ];
-
-  xdg.configFile = {
-    alacritty = {
-      source = ./alacritty.toml;
-      recursive = true;
-    };
+  programs.alacritty = {
+    enable = true;
+    settings = builtins.fromTOML (builtins.readFile ./alacritty.toml);
   };
 }

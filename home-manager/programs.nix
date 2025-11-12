@@ -5,7 +5,10 @@
   home.sessionVariables.SHELL = "${pkgs.zsh}/bin/zsh";
 
   programs.firefox.enable = true;
-  programs.starship.enable = true;
+  programs.starship = {
+    enable = true;
+    settings = builtins.fromTOML (builtins.readFile ./starship.toml);
+  };
   
   programs.ssh = {
     enable = true;
@@ -26,14 +29,11 @@
     htop
     nemo
     rofi
-    starship
     sublime3
     tree
     xclip
     zsh
   ];
-  
-  xdg.configFile."starship.toml".source = ./starship.toml; 
   
   home.file.".zshrc" = {
     source = ./zsh/.zshrc;
