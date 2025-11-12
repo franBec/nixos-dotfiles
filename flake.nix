@@ -3,35 +3,31 @@
     inputs = {
         nixpkgs.url = "nixpkgs/nixos-25.05";
 
-        # home-manager is defined inside of the flake so the flake itself manages home-manager
         home-manager = {
             url = "github:nix-community/home-manager/release-25.05";
-            inputs.nixpkgs.follows = "nixpkgs"; # Prevents home-manager to pull its own version of nix packages
+            inputs.nixpkgs.follows = "nixpkgs";
         };
     };
 
-    outputs = {self, nixpkgs, home-manager, ...}:{
+    outputs = {self, nixpkgs, home-manager, ...}: {
 
-        # Define the ecosystem for the "nixos" hostname
+        # Define configurations for specific hosts
         nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-
-            # Tells the flake to:
-            # - Build the system using ./configuration.nix
-            # - Use home-manager inside these modules
+            
+            # IMPORTS NOW POINT TO THE HOST DIRECTORY
             modules = [
-                ./configuration.nix
+                ./hosts/LENOVO-LNVNB161216/configuration.nix
                 home-manager.nixosModules.home-manager
                 {
-                    # Global settings for home-manager
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
-                        users.pollito = import ./home.nix;
+                        # Home Manager config for user pollito now points to the host-specific home.nix
+                        users.pollito = import ./hosts/LENOVO-LNVNB161216/home.nix;
                         backupFileExtension = "backup";
                     };
                 }
-
             ];
         };
     };
