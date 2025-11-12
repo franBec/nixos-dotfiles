@@ -33,12 +33,10 @@
     zsh
   ];
   
-  # Starship config is managed here if it doesn't need its own dedicated module folder
-  xdg.configFile."starship.toml".source = ../../config/starship.toml; 
+  xdg.configFile."starship.toml".source = ./starship.toml; 
   
-  # ZSH RC still needs to be symlinked/sourced (since it contains custom shell functions)
   home.file.".zshrc" = {
-    source = ../../config/zsh/.zshrc;
+    source = ./zsh/.zshrc;
     recursive = false;
   };
 }
