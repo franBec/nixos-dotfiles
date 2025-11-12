@@ -55,6 +55,19 @@ in
   programs.firefox.enable = true;
   programs.git.enable = true;
   programs.starship.enable = true;
+  programs.ssh = {
+    enable = true;
+    startAgent = true;
+    
+    # Optional: Configure host-specific settings
+    matchBlocks = {
+      "github.com" = {
+        user = "git";
+        identityFile = "~/.ssh/github_ed25519";
+        forwardAgent = false;
+      };
+    };
+  };
 
   # -------------------------------------------------------------------
   # 4. Packages
@@ -68,6 +81,7 @@ in
     google-chrome
     htop
     nemo
+    rofi
     starship
     sublime3
     tree
