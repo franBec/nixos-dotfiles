@@ -11,7 +11,7 @@ in
   home.stateVersion = "25.05";
 
   imports = [
-    ./home-modules/development.nix
+    ./home-modules/multimedia.nix
   ];
 
   # -------------------------------------------------------------------
