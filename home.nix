@@ -33,7 +33,7 @@ in
 
   # Expanded xdg.configFile block for Alacritty and Starship
   xdg.configFile = {
-    # Alacritty (Existing directory setup)
+    # Alacritty (Symlink ~/.config/alacritty/alacritty.toml)
     alacritty = {
       source = create_symlink "${dotfiles}/alacritty";
       recursive = true;
