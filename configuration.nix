@@ -58,6 +58,7 @@
   };
 
   home-manager.backupFileExtension = "backup";
+  programs.zsh.enable = true;
 
   users.users.pollito = {
     isNormalUser = true;
@@ -66,7 +67,10 @@
     packages = with pkgs; [
       kdePackages.kate
     ];
+    shell = pkgs.zsh; 
+
   };
+
 
   nixpkgs.config.allowUnfree = true;
 

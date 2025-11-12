@@ -16,7 +16,7 @@ in
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
     };
-    initExtra = ''
+    initContent = ''
           freshfetch
           debuginfo() {
               local LOG_FILE="$HOME/nixos-debug-info.log"
