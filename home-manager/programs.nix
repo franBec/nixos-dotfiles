@@ -36,7 +36,10 @@
   ];
   
   home.file.".zshrc" = {
-    source = ./zsh/.zshrc;
+    text = ''
+      eval "$(${pkgs.starship}/bin/starship init zsh)"
+      ${builtins.readFile ./zsh/.zshrc}
+    '';
     recursive = false;
   };
 }
