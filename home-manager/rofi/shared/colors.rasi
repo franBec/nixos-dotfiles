@@ -1,0 +1,15 @@
+@import "../catppuccin-mocha.rasi"
+
+* {
+    /* Base Colors */
+    background:                  @base;          /* #1e1e2e */
+    foreground:                  @text;          /* #cdd6f4 */
+
+    /* Selection/Active Colors */
+    selected:                    @blue;          /* #89b4fa */
+    active:                      @mauve;         /* #cba6f7 */
+    urgent:                      @red;           /* #f38ba8 */
+
+    /* Background variants */
+    background-alt:              @surface0;      /* #313244 (Used for alternate list items or backgrounds) */
+}
