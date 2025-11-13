@@ -7,13 +7,16 @@
   programs.rofi = {
     enable = true;
     
-    theme = "${config.xdg.configHome}/rofi/catppuccin-mocha.rasi"; 
+    theme = "${config.xdg.configHome}/rofi/catppuccin-default.rasi"; 
 
-    extraConfig = {
-      modi = "drun,run";
-    };
+    extraConfig = {};
   };
 
+  home.file.".config/rofi/catppuccin-default.rasi" = {
+    source = ./catppuccin-default.rasi;
+    target = ".config/rofi/catppuccin-default.rasi";
+  };
+  
   home.file.".config/rofi/catppuccin-mocha.rasi" = {
     source = ./catppuccin-mocha.rasi;
     target = ".config/rofi/catppuccin-mocha.rasi";
