@@ -1,6 +1,9 @@
 @import "../catppuccin-mocha.rasi"
 
 * {
+	/* 90% opacity (10% transparent) = E6 */
+    alpha-value:                 #E6;
+
     /* Base Colors */
     background:                  @base;          /* #1e1e2e */
     foreground:                  @text;          /* #cdd6f4 */
