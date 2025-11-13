@@ -1,7 +1,5 @@
 { pkgs, ... }:
 {
-  programs.firefox.enable = true;
-
   programs.ssh = {
     enable = true;
     matchBlocks = {
@@ -12,16 +10,4 @@
       };
     };
   };
-
-  home.packages = with pkgs; [
-    bat
-    google-chrome
-    htop
-    nemo
-    rofi
-    sublime3
-    sublime-merge
-    tree
-    xclip
-  ];  
 }
