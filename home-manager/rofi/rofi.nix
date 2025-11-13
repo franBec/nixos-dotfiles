@@ -7,9 +7,10 @@
   programs.rofi = {
     enable = true;
     
+    theme = "${config.xdg.configHome}/rofi/catppuccin-mocha.rasi"; 
+
     extraConfig = {
       modi = "drun,run";
-      theme = "${config.xdg.configHome}/rofi/catppuccin-mocha.rasi";
     };
   };
 
