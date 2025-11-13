@@ -1,18 +1,15 @@
 @import "../catppuccin-mocha.rasi"
 
 * {
-    /* 90% opacity (10% transparent) = E6 */
-    alpha-value:                 #E6;
-    
-    /* Base Colors with Alpha */
-    background:                  @base @alpha-value;     /* #1e1e2eE6 (90% opaque background) */
-    foreground:                  @text;                  /* #cdd6f4 */
+    /* --- 90% Opaque Colors --- */
+    /* Base Background (#1e1e2e) + Alpha E6 */
+    background:                  #1e1e2eE6;      
+    /* Surface 0 Background (#313244) + Alpha E6 */
+    background-alt:              #313244E6; 
 
-    /* Selection/Active Colors */
-    selected:                    @blue;                  /* #89b4fa */
-    active:                      @mauve;                 /* #cba6f7 */
-    urgent:                      @red;                   /* #f38ba8 */
-
-    /* Background variants with Alpha */
-    background-alt:              @surface0 @alpha-value; /* #313244E6 (90% opaque alternate background) */
+    /* --- Opaque Colors --- */
+    foreground:                  @text;          /* #cdd6f4 */
+    selected:                    @blue;          /* #89b4fa */
+    active:                      @mauve;         /* #cba6f7 */
+    urgent:                      @red;           /* #f38ba8 */
 }
