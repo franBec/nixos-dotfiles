@@ -4,7 +4,6 @@
 
   home.packages = with pkgs; [
     bat
-    btop
     google-chrome
     rofi
     sublime3
