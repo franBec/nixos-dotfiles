@@ -5,7 +5,6 @@
   home.packages = with pkgs; [
     bat
     google-chrome
-    rofi
     sublime3
     tree
     xclip
