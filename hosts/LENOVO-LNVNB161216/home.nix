@@ -8,6 +8,7 @@
   imports = [
     ../../home-manager/alacritty/alacritty.nix
     ../../home-manager/git/git.nix
+    ../../home-manager/shell-customization/shell-customization.nix
     ../../home-manager/programs.nix
   ];
 }

@@ -1,11 +1,11 @@
 # This file is symlinked from home-manager
 alias nrs="sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos"
-freshfetch
+fastfetch
 nixosInfo() {
     local LOG_FILE="$HOME/nixos-debug-info.log"
     (
-        printf "SECTION: FRESHFETCH INFO\n"
-        freshfetch
+        printf "SECTION: FASTFETCH INFO\n"
+        fastfetch
         
         printf "\nSECTION: SESSION TYPE\n"
         echo "XDG_SESSION_TYPE: $XDG_SESSION_TYPE"
