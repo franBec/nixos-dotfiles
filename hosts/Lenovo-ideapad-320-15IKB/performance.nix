@@ -4,9 +4,9 @@
   # 1. NVIDIA Hybrid Graphics Setup
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  # Note: Slightly older card (940MX) might sometimes need to use
-  # `legacyPackages.390` or `legacyPackages.470` instead of `stable`,
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  # 940MX is a Maxwell GPU - use closed source drivers and possibly older version
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+  hardware.nvidia.open = false;  # Use closed source drivers for older GPU
 
   # NVIDIA Prime Configuration
   hardware.nvidia.prime = {
