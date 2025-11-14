@@ -31,6 +31,9 @@
   zramSwap.algorithm = "zstd";
 
   # 3. CPU Performance Governor
+  # Disable power-profiles-daemon (it overrides CPU governor)
+  services.power-profiles-daemon.enable = false;
+  
   # Create a systemd service to set CPU governor at boot
   systemd.services.cpu-governor-performance = {
     description = "Set CPU governor to performance mode";
