@@ -12,7 +12,11 @@ let
 
     echo "Starting MPV..."
 
-    # Start mpv with a unique class name
+    # Disable Nemo desktop first
+    gsettings set org.nemo.desktop show-desktop-icons false
+    sleep 1
+
+    # Start mpv
     ${pkgs.mpv}/bin/mpv \
       --loop \
       --no-audio \
@@ -27,65 +31,50 @@ let
       --x11-name=mpv-wallpaper \
       --title=mpv-wallpaper \
       --force-window=immediate \
+      --cursor-autohide=always \
       "${videoPath}" &
 
     MPV_PID=$!
     echo "MPV started with PID: $MPV_PID"
 
-    # Wait for window to appear (try for up to 10 seconds)
+    # Wait for window
     MPV_WINDOW=""
     for i in {1..20}; do
       sleep 0.5
-
-      # Try multiple search methods
-      MPV_WINDOW=$(${pkgs.xdotool}/bin/xdotool search --class "mpv-wallpaper" 2>/dev/null | head -1)
-
-      if [ -z "$MPV_WINDOW" ]; then
-        MPV_WINDOW=$(${pkgs.xdotool}/bin/xdotool search --name "mpv-wallpaper" 2>/dev/null | head -1)
-      fi
-
-      if [ -z "$MPV_WINDOW" ]; then
-        MPV_WINDOW=$(${pkgs.xdotool}/bin/xdotool search --pid $MPV_PID 2>/dev/null | head -1)
-      fi
-
+      MPV_WINDOW=$(${pkgs.xdotool}/bin/xdotool search --pid $MPV_PID 2>/dev/null | head -1)
       if [ -n "$MPV_WINDOW" ]; then
-        echo "Found MPV window: $MPV_WINDOW (attempt $i)"
+        echo "Found MPV window: $MPV_WINDOW"
         break
       fi
-
-      echo "Waiting for window... (attempt $i/20)"
     done
 
     if [ -z "$MPV_WINDOW" ]; then
-      echo "ERROR: Failed to find mpv window after 10 seconds"
-      echo "Checking if mpv process is still running..."
-      if ps -p $MPV_PID > /dev/null; then
-        echo "MPV is running but window not detected"
-        echo "All windows:"
-        ${pkgs.xdotool}/bin/xdotool search --all --name "" 2>/dev/null | tail -10
-      else
-        echo "MPV process died. Check video file: ${videoPath}"
-      fi
+      echo "ERROR: Failed to find mpv window"
       exit 1
     fi
 
-    echo "Configuring window..."
+    echo "Configuring window as desktop type..."
 
-    # Disable Nemo desktop to prevent conflicts
-    gsettings set org.nemo.desktop show-desktop-icons false
+    # Set window type to desktop using xprop
+    ${pkgs.xorg.xprop}/bin/xprop -id $MPV_WINDOW -f _NET_WM_WINDOW_TYPE 32a -set _NET_WM_WINDOW_TYPE _NET_WM_WINDOW_TYPE_DESKTOP
 
-    # Configure the window
-    ${pkgs.wmctrl}/bin/wmctrl -i -r $MPV_WINDOW -b add,sticky,below
-    ${pkgs.wmctrl}/bin/wmctrl -i -r $MPV_WINDOW -b add,skip_taskbar,skip_pager
+    # Additional window properties
+    ${pkgs.xorg.xprop}/bin/xprop -id $MPV_WINDOW -f _NET_WM_STATE 32a -set _NET_WM_STATE _NET_WM_STATE_BELOW,_NET_WM_STATE_STICKY
+
+    # Position and configure
     ${pkgs.xdotool}/bin/xdotool windowmove $MPV_WINDOW 0 0
+    ${pkgs.xdotool}/bin/xdotool windowsize $MPV_WINDOW 1920 1080
+    ${pkgs.wmctrl}/bin/wmctrl -i -r $MPV_WINDOW -b add,sticky,below,skip_taskbar,skip_pager
+    ${pkgs.xdotool}/bin/xdotool windowlower $MPV_WINDOW
+
+    # Make sure it stays below
+    sleep 1
     ${pkgs.xdotool}/bin/xdotool windowlower $MPV_WINDOW
 
     echo "Video wallpaper started successfully!"
-    echo "Window ID: $MPV_WINDOW"
 
-    # Start monitor in background
+    # Start monitor
     ${monitorScript}/bin/monitor-video-wallpaper $MPV_WINDOW &
-    echo "Monitor started"
   '';
 
   monitorScript = pkgs.writeShellScriptBin "monitor-video-wallpaper" ''
@@ -93,54 +82,27 @@ let
 
     MPV_WINDOW=$1
 
-    if [ -z "$MPV_WINDOW" ]; then
-      echo "No window ID provided to monitor"
-      exit 1
-    fi
-
-    echo "Monitoring window $MPV_WINDOW"
-
     while true; do
       sleep 2
 
-      # Check if mpv is still running
       if ! pgrep -f "mpv.*wallpaper" > /dev/null; then
-        echo "MPV stopped, exiting monitor"
         exit 0
       fi
 
-      # Keep it at the bottom
+      # Keep enforcing desktop type and below state
+      ${pkgs.xorg.xprop}/bin/xprop -id $MPV_WINDOW -f _NET_WM_WINDOW_TYPE 32a -set _NET_WM_WINDOW_TYPE _NET_WM_WINDOW_TYPE_DESKTOP 2>/dev/null
       ${pkgs.xdotool}/bin/xdotool windowlower $MPV_WINDOW 2>/dev/null
-      ${pkgs.wmctrl}/bin/wmctrl -i -r $MPV_WINDOW -b add,below 2>/dev/null
+      ${pkgs.wmctrl}/bin/wmctrl -i -r $MPV_WINDOW -b add,below,sticky 2>/dev/null
     done
   '';
 
   stopScript = pkgs.writeShellScriptBin "stop-video-wallpaper" ''
     #!${pkgs.bash}/bin/bash
-    echo "Stopping video wallpaper..."
     pkill -f "mpv.*wallpaper"
     pkill -f "monitor-video-wallpaper"
+    # Optionally restore desktop icons
+    # gsettings set org.nemo.desktop show-desktop-icons true
     echo "Video wallpaper stopped"
-  '';
-
-  debugScript = pkgs.writeShellScriptBin "debug-video-wallpaper" ''
-    #!${pkgs.bash}/bin/bash
-    echo "=== Video Wallpaper Debug Info ==="
-    echo ""
-    echo "Video file: ${videoPath}"
-    echo "File exists: $([ -f "${videoPath}" ] && echo "YES" || echo "NO")"
-    echo ""
-    echo "MPV processes:"
-    ps aux | grep mpv | grep -v grep
-    echo ""
-    echo "MPV windows:"
-    ${pkgs.xdotool}/bin/xdotool search --class mpv 2>/dev/null || echo "None found"
-    echo ""
-    echo "All recent windows:"
-    ${pkgs.xdotool}/bin/xdotool search --all --name "" 2>/dev/null | tail -20
-    echo ""
-    echo "Testing MPV directly:"
-    timeout 3 ${pkgs.mpv}/bin/mpv --version
   '';
 
   restoreDesktopScript = pkgs.writeShellScriptBin "restore-desktop-icons" ''
@@ -154,10 +116,10 @@ in
     mpv
     xdotool
     wmctrl
+    xorg.xprop
     startScript
     stopScript
     monitorScript
-    debugScript
     restoreDesktopScript
   ];
 
