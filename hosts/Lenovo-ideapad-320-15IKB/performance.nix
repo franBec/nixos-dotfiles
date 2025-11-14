@@ -22,7 +22,4 @@
   boot.kernelParams = [
     "elevator=kyber"
   ];
-
-  # 3. CPU Performance Governor
-  services.powerManagement.cpuFreqGovernor = "performance";
 }
