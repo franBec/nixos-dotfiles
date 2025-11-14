@@ -36,5 +36,11 @@
   ];
 
   # 3. CPU Performance Governor
+  # For intel_pstate, use boot parameter instead
+  boot.kernelParams = [
+    "intel_pstate=active"
+    "intel_pstate.max_perf_pct=100"
+  ];
+  
   powerManagement.cpuFreqGovernor = "performance";
 }
