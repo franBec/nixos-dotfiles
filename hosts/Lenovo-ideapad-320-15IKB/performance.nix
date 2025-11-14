@@ -30,17 +30,13 @@
   zramSwap.enable = true;
   zramSwap.algorithm = "zstd";
 
-  # Set default I/O scheduler via kernel parameters
+  # Kernel parameters: I/O scheduler + CPU performance
   boot.kernelParams = [
     "elevator=kyber"
-  ];
-
-  # 3. CPU Performance Governor
-  # For intel_pstate, use boot parameter instead
-  boot.kernelParams = [
     "intel_pstate=active"
     "intel_pstate.max_perf_pct=100"
   ];
-  
+
+  # 3. CPU Performance Governor
   powerManagement.cpuFreqGovernor = "performance";
 }
