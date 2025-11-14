@@ -30,21 +30,9 @@
   zramSwap.enable = true;
   zramSwap.algorithm = "zstd";
 
-  # Kernel parameters for CPU performance
-  boot.kernelParams = [
-    "intel_pstate=active"
-  ];
-
-  # 3. CPU Performance Governor (for intel_pstate)
-  # Use systemd service to force performance mode
-  systemd.services.cpu-performance = {
-    description = "Set CPU governor to performance";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.bash}/bin/bash -c 'echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'";
-    };
-  };
+  # 3. CPU Performance Governor
+  # Force performance mode for intel_pstate
+  powerManagement.cpuFreqGovernor = lib.mkForce "performance";
 
   # 4. I/O Scheduler - use udev rules (modern approach)
   services.udev.extraRules = ''
