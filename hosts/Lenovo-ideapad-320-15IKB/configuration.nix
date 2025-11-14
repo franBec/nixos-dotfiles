@@ -3,15 +3,13 @@
 {
   imports =
     [
-      ./hardware-configuration.nix
+      ./modules/boot-loader.nix
       ./modules/cpu-performance.nix
+      ./modules/hardware-configuration.nix
       ./modules/io-scheduler.nix
       ./modules/nvidia.nix
       ./modules/zram-swap.nix
     ];
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;

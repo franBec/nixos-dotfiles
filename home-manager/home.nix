@@ -14,6 +14,7 @@
     ./rofi/rofi.nix
     ./shell-customization/shell-customization.nix
     ./ssh/ssh.nix
+    ./webstorm/webstorm.nix
     ./utils.nix
   ];
 }
