@@ -31,8 +31,17 @@
   zramSwap.algorithm = "zstd";
 
   # 3. CPU Performance Governor
-  # Force performance mode for intel_pstate
-  powerManagement.cpuFreqGovernor = lib.mkForce "performance";
+  # Create a systemd service to set CPU governor at boot
+  systemd.services.cpu-governor-performance = {
+    description = "Set CPU governor to performance mode";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "systemd-modules-load.service" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = "yes";
+      ExecStart = "${pkgs.coreutils}/bin/sh -c 'echo performance | ${pkgs.coreutils}/bin/tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'";
+    };
+  };
 
   # 4. I/O Scheduler - use udev rules (modern approach)
   services.udev.extraRules = ''
