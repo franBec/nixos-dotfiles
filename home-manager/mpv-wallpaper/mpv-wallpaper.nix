@@ -133,3 +133,11 @@ in
     Terminal=false
   '';
 }
+
+/*
+commands available:
+
+stop-video-wallpaper # Stop the animated wallpaper
+start-video-wallpaper # Start/restart the animated wallpaper
+restore-desktop-icons # Restore desktop icons (if you want them over the video)
+*/
