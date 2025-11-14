@@ -18,23 +18,38 @@ let
 
     sleep 1
 
+    # Get the desktop window name for Cinnamon
+    DESKTOP_WINDOW=$(${pkgs.xdotool}/bin/xdotool search --class "Nemo-desktop" | head -1)
+
     echo "Starting animated background..."
-    # Use absolute paths and proper escaping
-    exec ${pkgs.xwinwrap}/bin/xwinwrap \
+    # Key flags for Cinnamon:
+    # -ov = override redirect (makes it part of desktop)
+    # -ni = no input (click-through)
+    # -st = skip taskbar
+    # -sp = skip pager
+    # -b = below other windows
+    ${pkgs.xwinwrap}/bin/xwinwrap \
+      -ov \
       -g 1920x1080 \
       -ni \
       -s \
+      -st \
+      -sp \
       -nf \
       -b \
       -- ${pkgs.mpv}/bin/mpv \
+      --wid=WID \
       --loop \
       --no-audio \
       --no-osc \
       --no-osd-bar \
       --no-input-default-bindings \
+      --no-stop-screensaver \
       --really-quiet \
       --panscan=1.0 \
-      "${videoPath}"
+      "${videoPath}" &
+
+    echo "Background started. If you see a window, try disabling desktop icons in Cinnamon settings."
   '';
 
   stopScript = pkgs.writeShellScriptBin "stop-background" ''
@@ -50,11 +65,12 @@ in
     xwinwrap
     mpv
     procps
+    xdotool
     xwinwrapScript
     stopScript
   ];
 
-  # Manual autostart file (only enable after testing)
+  # Autostart
   home.file.".config/autostart/xwinwrap-background.desktop".text = ''
     [Desktop Entry]
     Type=Application
