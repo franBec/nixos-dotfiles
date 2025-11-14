@@ -2,100 +2,66 @@
 let
   videoPath = "/home/pollito/Videos/background.mp4";
 
-  xwinwrapScript = pkgs.writeShellScript "start-xwinwrap" ''
-    #!/usr/bin/env bash
+  xwinwrapScript = pkgs.writeShellScriptBin "restart-background" ''
+    #!${pkgs.bash}/bin/bash
 
-    # Wait for desktop to fully load
-    sleep 5
-
-    # Check if video file exists
+    # Check if video exists
     if [ ! -f "${videoPath}" ]; then
-      echo "Video file not found: ${videoPath}"
+      echo "Error: Video file not found at ${videoPath}"
       exit 1
     fi
 
     # Kill any existing instances
+    echo "Stopping any existing background..."
     ${pkgs.procps}/bin/pkill xwinwrap 2>/dev/null || true
-    ${pkgs.procps}/bin/pkill -f "mpv.*background" 2>/dev/null || true
+    ${pkgs.procps}/bin/pkill -f "mpv.*background.mp4" 2>/dev/null || true
 
     sleep 1
 
-    # Start xwinwrap with proper flags for background placement
-    # Key changes:
-    # -ov removed (was causing override issues)
-    # -b keeps it at bottom
-    # -d makes it a desktop window
-    ${pkgs.xwinwrap}/bin/xwinwrap \
+    echo "Starting animated background..."
+    # Use absolute paths and proper escaping
+    exec ${pkgs.xwinwrap}/bin/xwinwrap \
       -g 1920x1080 \
       -ni \
       -s \
       -nf \
       -b \
-      -un \
-      -argb \
-      -fdt \
       -- ${pkgs.mpv}/bin/mpv \
-        --loop=inf \
-        --no-audio \
-        --no-osc \
-        --no-osd-bar \
-        --no-input-default-bindings \
-        --no-input-cursor \
-        --no-terminal \
-        --really-quiet \
-        --vo=gpu \
-        --hwdec=auto \
-        --panscan=1.0 \
-        "${videoPath}" &
-
-    # Give it a moment to start
-    sleep 2
-
-    # Force the window to bottom (belt and suspenders approach)
-    XWINWRAP_PID=$(${pkgs.procps}/bin/pgrep xwinwrap)
-    if [ -n "$XWINWRAP_PID" ]; then
-      ${pkgs.wmctrl}/bin/wmctrl -r "xwinwrap" -b add,below 2>/dev/null || true
-    fi
+      --loop \
+      --no-audio \
+      --no-osc \
+      --no-osd-bar \
+      --no-input-default-bindings \
+      --really-quiet \
+      --panscan=1.0 \
+      "${videoPath}"
   '';
 
-  xwinwrapAutostart = pkgs.makeDesktopItem {
-    name = "xwinwrap-background";
-    desktopName = "Animated Background";
-    exec = "${xwinwrapScript}";
-    icon = "video-display";
-    type = "Application";
-    noDisplay = true;
-    terminal = false;
-    categories = [ "System" ];
-  };
+  stopScript = pkgs.writeShellScriptBin "stop-background" ''
+    #!${pkgs.bash}/bin/bash
+    echo "Stopping animated background..."
+    ${pkgs.procps}/bin/pkill xwinwrap 2>/dev/null || true
+    ${pkgs.procps}/bin/pkill -f "mpv.*background.mp4" 2>/dev/null || true
+    echo "Background stopped."
+  '';
 in
 {
   home.packages = with pkgs; [
     xwinwrap
     mpv
     procps
-    wmctrl
+    xwinwrapScript
+    stopScript
   ];
 
-  home.file.".config/autostart/xwinwrap-background.desktop".source =
-    "${xwinwrapAutostart}/share/applications/xwinwrap-background.desktop";
-
-  home.file."bin/restart-background" = {
-    text = ''
-      #!/usr/bin/env bash
-      ${xwinwrapScript}
-    '';
-    executable = true;
-  };
-
-  # Emergency stop script
-  home.file."bin/stop-background" = {
-    text = ''
-      #!/usr/bin/env bash
-      ${pkgs.procps}/bin/pkill xwinwrap
-      ${pkgs.procps}/bin/pkill -f "mpv.*background"
-      echo "Animated background stopped"
-    '';
-    executable = true;
-  };
+  # Manual autostart file (only enable after testing)
+  home.file.".config/autostart/xwinwrap-background.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=Animated Background
+    Exec=${xwinwrapScript}/bin/restart-background
+    X-GNOME-Autostart-enabled=false
+    NoDisplay=true
+    Terminal=false
+  '';
 }
