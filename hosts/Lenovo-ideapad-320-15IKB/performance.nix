@@ -39,7 +39,7 @@
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = "yes";
-      ExecStart = "${pkgs.coreutils}/bin/sh -c 'echo performance | ${pkgs.coreutils}/bin/tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'";
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/echo performance | ${pkgs.coreutils}/bin/tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'";
     };
   };
 
