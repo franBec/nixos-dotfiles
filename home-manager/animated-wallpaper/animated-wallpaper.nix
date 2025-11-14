@@ -20,13 +20,17 @@ in
     unitConfig = {
       Description = "MPV Animated Wallpaper Loop (from HM)";
     };
-    wantedBy = [ "graphical-session.target" ];
+    
+    wantedBy = {
+      "graphical-session.target" = {};
+    };
+
     serviceConfig = {
       ExecStart = deployedScript;
       Restart = "on-failure";
       Type = "simple";
       ExecStartPre = "${pkgs.coreutils}/bin/sleep 2"; 
-      Path = [ pkgs.xdotool pkgs.mpv pkgs.bash ];
+      Path = [ pkgs.xdotool pkgs.mpv pkgs.bash ]; 
     };
   };
 }
