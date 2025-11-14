@@ -3,59 +3,23 @@
 {
   imports =
     [
-      ./modules/boot-loader.nix
-      ./modules/cpu-performance.nix
-      ./modules/hardware-configuration.nix
-      ./modules/io-scheduler.nix
-      ./modules/nvidia.nix
-      ./modules/zram-swap.nix
+      ./hardware-configuration.nix
+      ../../system-modules/audio.nix
+      ../../system-modules/boot-loader.nix
+      ../../system-modules/cpu-performance.nix
+      ../../system-modules/fonts.nix
+      ../../system-modules/i18n.nix
+      ../../system-modules/io-scheduler.nix
+      ../../system-modules/networking.nix
+      ../../system-modules/nvidia.nix
+      ../../system-modules/services-xserver.nix
+      ../../system-modules/zram-swap.nix
     ];
-
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
-  networking.nameservers = [
-    "1.1.1.1"   # Cloudflare Primary
-    "1.0.0.1"   # Cloudflare Secondary
-    "8.8.8.8"   # Google DNS (as a backup check)
-  ];
-  networking.networkmanager.dns = "none"; # Tells networkmanager to only use the static list defined above
 
   time.timeZone = "Europe/Lisbon";
 
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_GB.UTF-8";
-  };
-
   security.rtkit.enable = true;
-
-  services.xserver.enable = true;
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.cinnamon.enable = true;
-  services.xserver.xkb = {
-    layout = "us,latam";
-    options = "grp:win_space_toggle";
-    variant = "";
-  };
-
   services.printing.enable = true;
-
-  services.pulseaudio.enable = false;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
   programs.dconf.enable = true;
 
   programs.zsh.enable = true;
@@ -71,10 +35,6 @@
 
   environment.systemPackages = with pkgs; [
     wget
-  ];
-
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
