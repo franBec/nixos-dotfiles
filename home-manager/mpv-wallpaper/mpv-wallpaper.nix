@@ -7,7 +7,11 @@ let
 
     # Kill existing
     pkill -f "mpv.*wallpaper"
+    pkill -f "monitor-video-wallpaper"
     sleep 1
+
+    # Disable Nemo desktop (it conflicts)
+    gsettings set org.nemo.desktop show-desktop-icons false
 
     # Start mpv in background
     ${pkgs.mpv}/bin/mpv \
@@ -23,33 +27,70 @@ let
       --no-keepaspect \
       --panscan=1.0 \
       --title="mpv-wallpaper" \
+      --wid=0 \
       "${videoPath}" &
 
     MPV_PID=$!
     sleep 2
 
-    # Get mpv window and send to background
+    # Get mpv window
     MPV_WINDOW=$(${pkgs.xdotool}/bin/xdotool search --pid $MPV_PID | head -1)
 
     if [ -n "$MPV_WINDOW" ]; then
-      # Make it sticky, below, and skip taskbar
+      # Make it sticky and below
       ${pkgs.wmctrl}/bin/wmctrl -i -r $MPV_WINDOW -b add,sticky,below
       ${pkgs.wmctrl}/bin/wmctrl -i -r $MPV_WINDOW -b add,skip_taskbar,skip_pager
       ${pkgs.xdotool}/bin/xdotool windowmove $MPV_WINDOW 0 0
-
-      # Lower window to bottom
       ${pkgs.xdotool}/bin/xdotool windowlower $MPV_WINDOW
 
-      echo "Video wallpaper started successfully!"
+      echo "Video wallpaper started! Window ID: $MPV_WINDOW"
+
+      # Start monitor in background
+      ${monitorScript}/bin/monitor-video-wallpaper &
     else
       echo "Failed to find mpv window"
+      exit 1
     fi
+  '';
+
+  monitorScript = pkgs.writeShellScriptBin "monitor-video-wallpaper" ''
+    #!${pkgs.bash}/bin/bash
+
+    while true; do
+      sleep 3
+
+      # Check if mpv is still running
+      if ! pgrep -f "mpv.*wallpaper" > /dev/null; then
+        echo "MPV stopped, exiting monitor"
+        exit 0
+      fi
+
+      # Find and lower the mpv window
+      MPV_WINDOW=$(${pkgs.xdotool}/bin/xdotool search --name "mpv-wallpaper" 2>/dev/null | head -1)
+
+      if [ -n "$MPV_WINDOW" ]; then
+        # Keep it at the bottom
+        ${pkgs.xdotool}/bin/xdotool windowlower $MPV_WINDOW 2>/dev/null
+        ${pkgs.wmctrl}/bin/wmctrl -i -r $MPV_WINDOW -b add,below 2>/dev/null
+      fi
+    done
   '';
 
   stopScript = pkgs.writeShellScriptBin "stop-video-wallpaper" ''
     #!${pkgs.bash}/bin/bash
     pkill -f "mpv.*wallpaper"
+    pkill -f "monitor-video-wallpaper"
+
+    # Re-enable desktop icons (optional)
+    # gsettings set org.nemo.desktop show-desktop-icons true
+
     echo "Video wallpaper stopped"
+  '';
+
+  restoreDesktopScript = pkgs.writeShellScriptBin "restore-desktop-icons" ''
+    #!${pkgs.bash}/bin/bash
+    gsettings set org.nemo.desktop show-desktop-icons true
+    echo "Desktop icons restored"
   '';
 in
 {
@@ -59,6 +100,8 @@ in
     wmctrl
     startScript
     stopScript
+    monitorScript
+    restoreDesktopScript
   ];
 
   home.file.".config/autostart/mpv-wallpaper.desktop".text = ''
