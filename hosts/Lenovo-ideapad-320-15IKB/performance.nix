@@ -24,6 +24,6 @@
   ];
 
   # 3. CPU Performance Governor
-  services.cpupower.enable = true;
-  services.cpupower.governor = "performance";
+  programs.cpupower.enable = true;
+  programs.cpupower.governor = "performance";
 }
