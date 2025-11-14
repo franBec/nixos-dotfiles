@@ -60,7 +60,7 @@ in
     Type=Application
     Name=Animated Background
     Exec=${xwinwrapScript}/bin/restart-background
-    X-GNOME-Autostart-enabled=false
+    X-GNOME-Autostart-enabled=true
     NoDisplay=true
     Terminal=false
   '';
