@@ -22,4 +22,8 @@
   boot.kernelParams = [
     "elevator=kyber"
   ];
+
+  # 3. CPU Performance Governor
+  programs.cpupower.enable = true;
+  programs.cpupower.governor = "performance";
 }
