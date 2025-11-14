@@ -8,15 +8,24 @@
   # `legacyPackages.390` or `legacyPackages.470` instead of `stable`,
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
-  # NOTE: This setting makes the Intel GPU the primary display output.
-  # You must use `prime-run` to launch applications on the NVIDIA card.
-  services.xserver.prime.enable = true;
+  # NVIDIA Prime Configuration
+  hardware.nvidia.prime = {
+    # Offload mode: Intel GPU is primary, use `nvidia-offload` for NVIDIA
+    offload.enable = true;
+    offload.enableOffloadCmd = true;  # Provides `nvidia-offload` command
+    
+    # Bus IDs from /sys/class/drm/
+    intelBusId = "PCI:0:2:0";    # 0000:00:02.0
+    nvidiaBusId = "PCI:1:0:0";   # 0000:01:00.0
+  };
+
+  hardware.nvidia.modesetting.enable = true;
 
   # 2. Performance Tweaks (Memory/I/O)
   
   # ZRAM: Compressed swap in RAM
-  services.zram.enable = true;
-  services.zram.algorithm = "zstd";
+  zramSwap.enable = true;
+  zramSwap.algorithm = "zstd";
 
   # Set default I/O scheduler via kernel parameters
   boot.kernelParams = [
@@ -24,6 +33,5 @@
   ];
 
   # 3. CPU Performance Governor
-  programs.cpupower.enable = true;
-  programs.cpupower.governor = "performance";
+  powerManagement.cpuFreqGovernor = "performance";
 }
