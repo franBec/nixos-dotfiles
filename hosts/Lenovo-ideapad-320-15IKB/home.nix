@@ -10,6 +10,7 @@
     ../../home-manager/btop/btop.nix
     ../../home-manager/google-chrome/google-chrome.nix
     ../../home-manager/git/git.nix
+    ../../home-manager/performance-test/mesa-demos.nix
     ../../home-manager/rofi/rofi.nix
     ../../home-manager/shell-customization/shell-customization.nix
     ../../home-manager/ssh/ssh.nix

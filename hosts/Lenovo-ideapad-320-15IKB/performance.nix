@@ -30,13 +30,25 @@
   zramSwap.enable = true;
   zramSwap.algorithm = "zstd";
 
-  # Kernel parameters: I/O scheduler + CPU performance
+  # Kernel parameters for CPU performance
   boot.kernelParams = [
-    "elevator=kyber"
     "intel_pstate=active"
-    "intel_pstate.max_perf_pct=100"
   ];
 
-  # 3. CPU Performance Governor
-  powerManagement.cpuFreqGovernor = "performance";
+  # 3. CPU Performance Governor (for intel_pstate)
+  # Use systemd service to force performance mode
+  systemd.services.cpu-performance = {
+    description = "Set CPU governor to performance";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.bash}/bin/bash -c 'echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'";
+    };
+  };
+
+  # 4. I/O Scheduler - use udev rules (modern approach)
+  services.udev.extraRules = ''
+    # Set kyber scheduler for rotating disks and SSDs
+    ACTION=="add|change", KERNEL=="sd[a-z]|nvme[0-9]*", ATTR{queue/scheduler}="kyber"
+  '';
 }
