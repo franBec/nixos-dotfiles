@@ -1,6 +1,9 @@
 { config, pkgs, lib, ... }:
 
 {
+  # Accept NVIDIA license
+  nixpkgs.config.nvidia.acceptLicense = true;
+
   # 1. NVIDIA Hybrid Graphics Setup
   services.xserver.videoDrivers = [ "nvidia" ];
 
