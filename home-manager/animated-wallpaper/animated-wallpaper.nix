@@ -16,9 +16,11 @@ in
   };
 
   systemd.user.services.animated-wallpaper = {
-    description = "MPV Animated Wallpaper Loop (from HM)";
+    
+    unitConfig = {
+      Description = "MPV Animated Wallpaper Loop (from HM)";
+    };
     wantedBy = [ "graphical-session.target" ];
-
     serviceConfig = {
       ExecStart = deployedScript;
       Restart = "on-failure";
