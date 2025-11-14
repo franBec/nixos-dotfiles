@@ -8,6 +8,7 @@
       ../../system-modules/boot-loader.nix
       ../../system-modules/cpu-performance.nix
       ../../system-modules/fonts.nix
+      ../../system-modules/garbage-collecting.nix
       ../../system-modules/i18n.nix
       ../../system-modules/io-scheduler.nix
       ../../system-modules/networking.nix
