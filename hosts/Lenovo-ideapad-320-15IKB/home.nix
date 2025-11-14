@@ -7,6 +7,7 @@
 
   imports = [
     ../../home-manager/alacritty/alacritty.nix
+    ../../home-manager/animated-wallpaper/animated-wallpaper.nix
     ../../home-manager/btop/btop.nix
     ../../home-manager/google-chrome/google-chrome.nix
     ../../home-manager/git/git.nix
