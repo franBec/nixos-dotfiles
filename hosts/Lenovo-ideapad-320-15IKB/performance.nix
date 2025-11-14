@@ -2,24 +2,23 @@
 
 {
   # 1. NVIDIA Hybrid Graphics Setup
-  # Enables NVIDIA drivers and PRIME (hybrid graphics switching)
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   services.xserver.prime.enable = true;
 
   # 2. Performance Tweaks (Memory/I/O)
   
-  # ZRAM: Compressed swap in RAM to prevent hard swaps to disk
+  # ZRAM: Compressed swap in RAM
   services.zram.enable = true;
-  services.zram.algorithm = "zstd"; # ZSTD is generally faster than default LZO
+  services.zram.algorithm = "zstd";
 
-  # Optional I/O Scheduler tweak for better disk latency (kyber is good for SSDs)
-  boot.deviceTree.config = {
-    "default_iosched" = "kyber";
-  };
+  # Set default I/O scheduler via kernel parameters
+  # 'kyber' is a common choice for modern SSDs.
+  boot.kernelParams = [
+    "elevator=kyber"
+  ];
 
   # 3. CPU Performance Governor
-  # Forces CPU to prioritize performance over power saving when running
   services.cpupower.enable = true;
   services.cpupower.governor = "performance";
 }
