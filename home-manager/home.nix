@@ -16,5 +16,6 @@
     ./ssh/ssh.nix
     ./jetbrains/webstorm.nix
     ./utils.nix
+    ./xwinwrap/xwinwrap.nix
   ];
 }
