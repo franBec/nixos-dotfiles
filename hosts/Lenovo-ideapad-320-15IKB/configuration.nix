@@ -4,7 +4,10 @@
   imports =
     [
       ./hardware-configuration.nix
-      ./performance.nix
+      ./modules/cpu-performance.nix
+      ./modules/io-scheduler.nix
+      ./modules/nvidia.nix
+      ./modules/zram-swap.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
