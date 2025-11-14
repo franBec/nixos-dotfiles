@@ -128,7 +128,7 @@ in
     Type=Application
     Name=MPV Video Wallpaper
     Exec=${startScript}/bin/start-video-wallpaper
-    X-GNOME-Autostart-enabled=false
+    X-GNOME-Autostart-enabled=true
     NoDisplay=true
     Terminal=false
   '';
