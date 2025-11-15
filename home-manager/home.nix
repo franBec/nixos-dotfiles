@@ -10,7 +10,8 @@
     ./btop/btop.nix
     ./google-chrome/google-chrome.nix
     ./git/git.nix
-    ./mpv-wallpaper/mpv-wallpaper.nix
+    ./hidamari/hidamari.nix
+#    ./mpv-wallpaper/mpv-wallpaper.nix
     ./performance-test/mesa-demos.nix
     ./rofi/rofi.nix
     ./shell-customization/shell-customization.nix
