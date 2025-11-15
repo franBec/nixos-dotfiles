@@ -5,13 +5,13 @@ let
   # Build Hidamari from source
   hidamari = pkgs.python3Packages.buildPythonApplication rec {
     pname = "hidamari";
-    version = "2.1.1";
+    version = "3.6";
 
     src = pkgs.fetchFromGitHub {
       owner = "jeffshee";
       repo = "hidamari";
       rev = "v${version}";
-      sha256 = "sha256-8xF/SJY6VdLfKcx8Nwrat5ZbWFLWG9nKcLFLXLFLrLY=";
+      sha256 = "sha256-4hpznrnV1Mc2GVh2Oo4y6/M++YtEO3snHkfzP2kog50=";
     };
 
     propagatedBuildInputs = with pkgs.python3Packages; [
