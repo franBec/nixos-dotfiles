@@ -3,7 +3,7 @@
 {
   services.xserver = {
     enable = true;
-    displayManager.lightdm.enable = true;
+#    displayManager.lightdm.enable = true;
     desktopManager.cinnamon.enable = true;
     xkb = {
       layout = "us,latam";
