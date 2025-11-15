@@ -11,7 +11,6 @@
     ./google-chrome/google-chrome.nix
     ./git/git.nix
     ./komorebi/komorebi.nix
-#    ./mpv-wallpaper/mpv-wallpaper.nix
     ./performance-test/mesa-demos.nix
     ./rofi/rofi.nix
     ./shell-customization/shell-customization.nix
