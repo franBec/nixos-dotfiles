@@ -1,6 +1,4 @@
 [window]
-columns = 120
-lines = 35
 opacity=0.9
 
 [font]
@@ -38,3 +36,7 @@ blue = "#74a8fc"
 magenta = "#f2aede"
 cyan = "#6bd7ca"
 white = "#bac2de"
+
+[window.dimensions]
+columns = 120
+lines = 35
