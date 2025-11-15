@@ -1,7 +1,7 @@
 alias nrs="sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos"
 fastfetch
 nixosInfo() {
-    local LOG_FILE="$HOME/nixos-debug-info.log"
+    local LOG_FILE="$HOME/nixos-dotfiles/nixos-debug-info.log"
     (
         printf "SECTION: FASTFETCH INFO\n"
         fastfetch
