@@ -1,4 +1,6 @@
 [window]
+columns = 120
+lines = 35
 opacity=0.9
 
 [font]
