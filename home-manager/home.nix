@@ -7,6 +7,7 @@
 
   imports = [
     ./alacritty/alacritty.nix
+    ./ani-cli/ani-cli.nix
     ./btop/btop.nix
     ./google-chrome/google-chrome.nix
     ./git/git.nix
