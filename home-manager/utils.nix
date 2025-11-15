@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     bat
+    dnslookup
     nix-prefetch-github
     sublime3
     toybox
