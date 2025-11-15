@@ -38,5 +38,5 @@ cyan = "#6bd7ca"
 white = "#bac2de"
 
 [window.dimensions]
-columns = 120
+columns = 100
 lines = 35
