@@ -3,6 +3,9 @@
 {
   services.displayManager.ly = {
     enable = true;
-    settings = {};
+    settings = {
+      bigclock = true;
+      save_last_session = true;
+    };
   };
 }
