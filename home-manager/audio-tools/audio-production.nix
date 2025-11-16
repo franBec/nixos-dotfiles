@@ -11,7 +11,7 @@
 #    carla           # Plugin host and rack
 
     # Guitar amp simulators & effects
-#    guitarix        # GTK guitar amp simulator (the "gtk" you remember!)
+    guitarix        # GTK guitar amp simulator (the "gtk" you remember!)
     gxplugins-lv2   # Guitarix LV2 plugins
 
     # Plugin suites
@@ -20,7 +20,7 @@
     x42-plugins     # Professional effects collection
 
     # Additional useful plugins
-    distrho         # DISTRHO Plugin collection
+    distrho-ports         # DISTRHO Plugin collection
     zam-plugins     # Zamaudio plugins
 
     # Utilities
