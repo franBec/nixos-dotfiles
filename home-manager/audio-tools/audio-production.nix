@@ -28,6 +28,6 @@
     easyeffects     # Real-time audio effects
 
     # Tuner for guitar
-    guitaritone     # Guitar tuner
+    lingot
   ];
 }
