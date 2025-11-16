@@ -5,7 +5,6 @@ let
   simpleModules = [
     "alacritty"
     "ani-cli"
-    "audio-tools"
     "btop"
     "google-chrome"
     "git"
@@ -23,6 +22,8 @@ in
   home.stateVersion = "25.05";
 
   imports = simpleImports ++ [
+    ./audio-tools/audio-production.nix
+    ./audio-tools/utils.nix
     ./performance-test/mesa-demos.nix
     ./jetbrains/webstorm.nix
     ./utils.nix
