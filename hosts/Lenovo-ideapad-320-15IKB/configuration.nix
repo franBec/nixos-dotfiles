@@ -5,6 +5,7 @@
     [
       ./hardware-configuration.nix
       ../../system-modules/audio.nix
+      ../../system-modules/audio-realtime.nix
       ../../system-modules/boot-loader.nix
       ../../system-modules/cpu-performance.nix
       ../../system-modules/fonts.nix
