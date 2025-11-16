@@ -30,5 +30,8 @@
 
     # Tuner for guitar
     lingot
+
+    # Notatation
+    musescore
   ];
 }
