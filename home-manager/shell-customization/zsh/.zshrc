@@ -6,9 +6,6 @@ nixosInfo() {
         printf "SECTION: FASTFETCH INFO\n"
         fastfetch
         
-        printf "\nSECTION: SESSION TYPE\n"
-        echo "XDG_SESSION_TYPE: $XDG_SESSION_TYPE"
-        
         printf "\nSECTION: DOTFILES TREE (~/nixos-dotfiles)\n"
         tree ~/nixos-dotfiles -I ".git"
         
