@@ -39,4 +39,12 @@
   home.sessionVariables = {
     LV2_PATH = "${config.home.homeDirectory}/.nix-profile/lib/lv2";
   };
+
+  # Wrapper for Ardour with LV2_PATH set
+  home.file.".local/bin/ardour-with-plugins".text = ''
+    #!/bin/sh
+    export LV2_PATH="$HOME/.nix-profile/lib/lv2"
+    exec ${pkgs.ardour}/bin/ardour8 "$@"
+  '';
+  home.file.".local/bin/ardour-with-plugins".executable = true;
 }
