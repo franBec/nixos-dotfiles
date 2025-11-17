@@ -34,4 +34,9 @@
     # Notatation
     musescore
   ];
+
+  # Set LV2_PATH so DAWs can find plugins
+  home.sessionVariables = {
+    LV2_PATH = "${config.home.homeDirectory}/.nix-profile/lib/lv2";
+  };
 }
