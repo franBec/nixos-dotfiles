@@ -18,11 +18,13 @@ in
 {
   home.packages = with pkgs; [
     ardour
-    guitarix
-    rakarrack
-    qpwgraph
+    bitwig-studio4
     easyeffects
+    guitarix
     lingot
+    rakarrack
+    musescore
+    qpwgraph
   ] ++ plugins;
 
   # Set LV2_PATH to point directly to nix store plugin locations
