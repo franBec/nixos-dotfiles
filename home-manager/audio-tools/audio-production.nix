@@ -1,47 +1,32 @@
-{ pkgs, config, ... }:
-{
-  home.packages = with pkgs; [
-    # Audio editor
-    audacity
-
-    # DAW
-    ardour
-    bitwig-studio4
-
-    # Plugin hosts & managers
-#    carla           # Plugin host and rack
-
-    # Guitar amp simulators & effects
-    guitarix        # GTK guitar amp simulator (the "gtk" you remember!)
-    gxplugins-lv2   # Guitarix LV2 plugins
-    rakarrack
-
-    # Plugin suites
-    calf            # Calf Studio Gear ("calif" you remember!)
-    distrho-ports   # DISTRHO Plugin collection
+{ pkgs, ... }:
+let
+  # All plugin packages
+  plugins = with pkgs; [
+    calf
+    distrho-ports
+    gxplugins-lv2
+    guitarix
     kapitonov-plugins-pack
-    lsp-plugins     # Linux Studio Plugins (excellent quality)
-    x42-plugins     # Professional effects collection
-    zam-plugins     # Zamaudio plugins
-
-    # Utilities
-    qpwgraph        # Visual audio routing for PipeWire
-    easyeffects     # Real-time audio effects
-
-    # Tuner for guitar
-    lingot
-
-    # Notatation
-    musescore
+    lsp-plugins
+    x42-plugins
+    zam-plugins
   ];
 
-  # Create symlink from ~/.lv2 to nix-profile plugins
-  home.activation.linkLV2Plugins = config.lib.dag.entryAfter ["writeBoundary"] ''
-    $DRY_RUN_CMD ln -sfn $VERBOSE_ARG \
-      ${config.home.homeDirectory}/.nix-profile/lib/lv2/* \
-      ${config.home.homeDirectory}/.lv2/ || true
-  '';
+  # Build LV2_PATH from all plugin packages
+  lv2Path = pkgs.lib.concatMapStringsSep ":" (pkg: "${pkg}/lib/lv2") plugins;
+in
+{
+  home.packages = with pkgs; [
+    ardour
+    guitarix
+    rakarrack
+    qpwgraph
+    easyeffects
+    lingot
+  ] ++ plugins;
 
-  # Ensure .lv2 directory exists
-  home.file.".lv2/.keep".text = "";
+  # Set LV2_PATH to point directly to nix store plugin locations
+  home.sessionVariables = {
+    LV2_PATH = lv2Path;
+  };
 }
