@@ -12,6 +12,7 @@
       ../../system-modules/garbage-collecting.nix
       ../../system-modules/i18n.nix
       ../../system-modules/io-scheduler.nix
+      ../../system-modules/keyring.nix
       ../../system-modules/ly.nix
       ../../system-modules/networking.nix
       ../../system-modules/nvidia.nix
