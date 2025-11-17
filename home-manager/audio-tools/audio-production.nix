@@ -35,16 +35,13 @@
     musescore
   ];
 
-  # Set LV2_PATH so DAWs can find plugins
-  home.sessionVariables = {
-    LV2_PATH = "${config.home.homeDirectory}/.nix-profile/lib/lv2";
-  };
-
-  # Wrapper for Ardour with LV2_PATH set
-  home.file.".local/bin/ardour-with-plugins".text = ''
-    #!/bin/sh
-    export LV2_PATH="$HOME/.nix-profile/lib/lv2"
-    exec ${pkgs.ardour}/bin/ardour8 "$@"
+  # Create symlink from ~/.lv2 to nix-profile plugins
+  home.activation.linkLV2Plugins = config.lib.dag.entryAfter ["writeBoundary"] ''
+    $DRY_RUN_CMD ln -sfn $VERBOSE_ARG \
+      ${config.home.homeDirectory}/.nix-profile/lib/lv2/* \
+      ${config.home.homeDirectory}/.lv2/ || true
   '';
-  home.file.".local/bin/ardour-with-plugins".executable = true;
+
+  # Ensure .lv2 directory exists
+  home.file.".lv2/.keep".text = "";
 }
