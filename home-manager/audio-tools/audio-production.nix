@@ -18,7 +18,7 @@ in
 {
   home.packages = with pkgs; [
     ardour
-    bitwig-studio4
+    bitwig-studio
     easyeffects
     guitarix
     lingot
