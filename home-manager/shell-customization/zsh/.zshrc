@@ -41,12 +41,35 @@ lv2Info() {
             fi
         done
 
-        printf "\n=== ALL PLUGINS (SORTED) ===\n\n"
+        printf "\n=== ALL PLUGINS WITH NAMES ===\n\n"
         for dir in $(echo $LV2_PATH | tr ':' '\n'); do
             if [ -d "$dir" ]; then
-                ls -1 "$dir"
+                for plugin_bundle in "$dir"/*; do
+                    if [ -d "$plugin_bundle" ]; then
+                        bundle_name=$(basename "$plugin_bundle")
+                        # Try to find the plugin name from TTL files
+                        plugin_name=$(grep -hE '(rdfs:label|doap:name)' "$plugin_bundle"/*.ttl 2>/dev/null | \
+                                     head -1 | \
+                                     sed -E 's/.*["<]([^">]+)[">].*/\1/' | \
+                                     tr -d '\n')
+
+                        if [ -n "$plugin_name" ]; then
+                            printf "%-50s | %s\n" "$bundle_name" "$plugin_name"
+                        else
+                            printf "%-50s | (name not found)\n" "$bundle_name"
+                        fi
+                    fi
+                done
             fi
-        done | sort -u
+        done | sort
+
+        printf "\n=== PLUGIN COUNT ===\n\n"
+        total=$(for dir in $(echo $LV2_PATH | tr ':' '\n'); do
+            if [ -d "$dir" ]; then
+                ls -1d "$dir"/*/ 2>/dev/null
+            fi
+        done | wc -l)
+        printf "Total LV2 plugins: %d\n" "$total"
 
     ) > "$LOG_FILE"
     echo "LV2 plugin data successfully exported to $LOG_FILE"
