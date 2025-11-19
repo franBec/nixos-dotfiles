@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
+    appimage-run
     bat
     busybox
     dnslookup
