@@ -23,7 +23,6 @@ in
     guitarix
     lingot
     rakarrack
-    musescore
     qpwgraph
   ] ++ plugins;
 

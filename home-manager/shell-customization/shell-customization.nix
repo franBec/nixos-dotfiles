@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     fastfetch
+    tree
   ];
   
   programs.zsh.enable = true;

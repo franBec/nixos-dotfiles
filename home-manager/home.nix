@@ -23,6 +23,7 @@ in
 
   imports = simpleImports ++ [
     ./audio-tools/audio-production.nix
+    ./audio-tools/musescore.nix
     ./audio-tools/utils.nix
     ./performance-test/mesa-demos.nix
     ./jetbrains/webstorm.nix

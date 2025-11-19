@@ -5,6 +5,7 @@
     bat
     busybox
     dnslookup
+    fastfetch
     nix-prefetch-github
     sublime3
     toybox
