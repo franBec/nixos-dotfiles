@@ -9,6 +9,7 @@
     toybox
     tree
     xclip
+    zip
   ];
 
   programs.firefox.enable = true;  
