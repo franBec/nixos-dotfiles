@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     bat
+    busybox
     dnslookup
     nix-prefetch-github
     sublime3
