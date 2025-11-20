@@ -25,8 +25,9 @@ in
     ./audio-tools/audio-production.nix
     ./audio-tools/musescore/musescore.nix
     ./audio-tools/utils.nix
-    ./performance-test/mesa-demos.nix
     ./jetbrains/webstorm.nix
+    ./performance-test/mesa-demos.nix
+    ./software-development/js/js.nix
     ./utils.nix
   ];
 }
