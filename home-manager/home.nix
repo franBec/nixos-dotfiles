@@ -27,7 +27,8 @@ in
     ./audio-tools/utils.nix
     ./jetbrains/webstorm.nix
     ./performance-test/mesa-demos.nix
-    ./software-development/js/js.nix
+    ./software-development/cli.nix
+    ./software-development/js.nix
     ./utils.nix
   ];
 }
