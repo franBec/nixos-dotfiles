@@ -1,0 +1,17 @@
+/* Adapta-Nokto Color Palette */
+* {
+    /* Core Surface Colors */
+    nokto-bg:       #222D32; /* Base Window Background */
+    nokto-panel:    #37474F; /* Lighter Surface / Selection Background */
+    nokto-border:   #455A64; /* Borders */
+
+    /* Text Colors */
+    nokto-fg:       #ECEFF1; /* Primary Text */
+    nokto-fg-alt:   #B0BEC5; /* Secondary/Muted Text */
+
+    /* Accents */
+    nokto-cyan:     #00BCD4; /* Primary Highlight/Cursor */
+    nokto-teal:     #009688; /* Secondary/Success */
+    nokto-red:      #FF5252; /* Urgent/Error */
+    nokto-blue:     #42A5F5; /* Info */
+}

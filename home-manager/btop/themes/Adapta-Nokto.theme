@@ -1,0 +1,88 @@
+# Main background
+# Adapta Nokto Base Background (Blue-Grey 900)
+theme[main_bg]="#222D32"
+
+# Main text color
+# Material Blue Grey 50 (High contrast off-white)
+theme[main_fg]="#ECEFF1"
+
+# Title color for boxes
+theme[title]="#ECEFF1"
+
+# Highlight color for keyboard shortcuts
+# Adapta Cyan (Accent)
+theme[hi_fg]="#00BCD4"
+
+# Background color of selected item in processes box
+# Material Blue Grey 700 (Lighter than bg)
+theme[selected_bg]="#37474F"
+
+# Foreground color of selected item in processes box
+theme[selected_fg]="#00BCD4"
+
+# Color of inactive/disabled text
+# Material Blue Grey 400
+theme[inactive_fg]="#78909C"
+
+# Color of text appearing on top of graphs
+theme[graph_text]="#CFD8DC"
+
+# Background color of the percentage meters
+theme[meter_bg]="#37474F"
+
+# Misc colors for processes box
+theme[proc_misc]="#B0BEC5"
+
+# CPU, Memory, Network, Proc box outline colors
+theme[cpu_box]="#00BCD4" # Cyan
+theme[mem_box]="#009688" # Teal
+theme[net_box]="#7E57C2" # Deep Purple
+theme[proc_box]="#42A5F5" # Blue
+
+# Box divider line and small boxes line color
+theme[div_line]="#455A64"
+
+# Temperature graph color (Teal -> Amber -> Red)
+theme[temp_start]="#009688"
+theme[temp_mid]="#FFC107"
+theme[temp_end]="#FF5252"
+
+# CPU graph colors (Cyan -> Blue)
+theme[cpu_start]="#00BCD4"
+theme[cpu_mid]="#29B6F6"
+theme[cpu_end]="#42A5F5"
+
+# Mem/Disk free meter (Deep Purple -> Indigo -> Blue)
+theme[free_start]="#7E57C2"
+theme[free_mid]="#5C6BC0"
+theme[free_end]="#42A5F5"
+
+# Mem/Disk cached meter (Teal -> Cyan)
+theme[cached_start]="#009688"
+theme[cached_mid]="#26A69A"
+theme[cached_end]="#00BCD4"
+
+# Mem/Disk available meter (Amber -> Deep Orange -> Red)
+theme[available_start]="#FFCA28"
+theme[available_mid]="#FF7043"
+theme[available_end]="#FF5252"
+
+# Mem/Disk used meter (Green -> Teal -> Cyan)
+theme[used_start]="#66BB6A"
+theme[used_mid]="#26A69A"
+theme[used_end]="#00BCD4"
+
+# Download graph colors (Amber -> Orange)
+theme[download_start]="#FFCA28"
+theme[download_mid]="#FFA726"
+theme[download_end]="#FF7043"
+
+# Upload graph colors (Teal -> Cyan)
+theme[upload_start]="#009688"
+theme[upload_mid]="#26A69A"
+theme[upload_end]="#00BCD4"
+
+# Process box color gradient (Blue -> Indigo -> Deep Purple)
+theme[process_start]="#42A5F5"
+theme[process_mid]="#5C6BC0"
+theme[process_end]="#7E57C2"

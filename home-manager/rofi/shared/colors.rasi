@@ -1,15 +1,23 @@
-@import "../catppuccin-mocha.rasi"
+@import "../adapta-nokto.rasi"
 
 * {
-    /* --- 90% Opaque Colors --- */
-    /* Base Background (#1e1e2e) + Alpha E6 */
-    background:                  #1e1e2eE6;      
-    /* Surface 0 Background (#313244) + Alpha E6 */
-    background-alt:              #313244E6; 
+    /* --- Backgrounds with Transparency (Alpha E6 = 90%) --- */
+
+    /* Main Window Background (#222D32 + E6) */
+    background:                  #222D32E6;
+
+    /* Alternate/Input Background (#263238 + E6) - Slightly lighter than base */
+    background-alt:              #263238E6;
 
     /* --- Opaque Colors --- */
-    foreground:                  @text;          /* #cdd6f4 */
-    selected:                    @blue;          /* #89b4fa */
-    active:                      @mauve;         /* #cba6f7 */
-    urgent:                      @red;           /* #f38ba8 */
+    foreground:                  var(nokto-fg);
+
+    /* The item currently highlighted by your arrow keys */
+    selected:                    var(nokto-cyan);
+
+    /* Items representing open windows (if using window switcher mode) */
+    active:                      var(nokto-teal);
+
+    /* Urgent items */
+    urgent:                      var(nokto-red);
 }

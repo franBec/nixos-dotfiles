@@ -1,41 +1,41 @@
 [window]
-opacity=0.9
+opacity = 0.9
 
 [font]
 normal = { family = "JetBrainsMono Nerd Font Propo", style = "Regular" }
 size = 10
 
 [colors.primary]
-foreground = "#cdd6f4"
-background = "#1e1e2e"
+background = "#222D32" # The signature Adapta-Nokto Dark Blue-Grey background
+foreground = "#ECEFF1" # Material "Blue Grey 50" for high contrast text without eye strain
 
 [colors.cursor]
-text = "#11111b"
-cursor = "#f5e0dc"
+text = "#222D32" # Using the Base Background color for text inside the block cursor
+cursor = "#00BCD4" # The signature Adapta Cyan
 
 [colors.selection]
-text = "#cdd6f4"
-background = "#353748"
+text = "#FFFFFF"
+background = "#37474F" # A lighter Blue-Grey for selection highlighting
 
 [colors.normal]
-black = "#45475a"
-red = "#f38ba8"
-green = "#a6e3a1"
-yellow = "#f9e2af"
-blue = "#89b4fa"
-magenta = "#f5c2e7"
-cyan = "#94e2d5"
-white = "#a6adc8"
+black   = "#263238" # Slightly lighter than background
+red     = "#FF5252" # Material Red
+green   = "#009688" # Material Teal (Common in Adapta)
+yellow  = "#FFC107" # Material Amber
+blue    = "#42A5F5" # Material Blue
+magenta = "#7E57C2" # Material Deep Purple
+cyan    = "#00BCD4" # Adapta Cyan
+white   = "#CFD8DC" # Muted White
 
 [colors.bright]
-black = "#585b70"
-red = "#f37799"
-green = "#89d88b"
-yellow = "#ebd391"
-blue = "#74a8fc"
-magenta = "#f2aede"
-cyan = "#6bd7ca"
-white = "#bac2de"
+black   = "#546E7A" # Lighter Blue-Grey
+red     = "#FF8A80"
+green   = "#26A69A"
+yellow  = "#FFE082"
+blue    = "#82B1FF"
+magenta = "#B39DDB"
+cyan    = "#80DEEA"
+white   = "#FFFFFF"
 
 [window.dimensions]
 columns = 100
