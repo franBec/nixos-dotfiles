@@ -25,10 +25,10 @@ in
     ./audio-tools/audio-production.nix
     ./audio-tools/musescore/musescore.nix
     ./audio-tools/utils.nix
-    ./jetbrains/webstorm.nix
     ./performance-test/mesa-demos.nix
-    ./software-development/cli.nix
+    ./software-development/gemini-cli.nix
     ./software-development/js.nix
+    ./software-development/webstorm.nix
     ./utils.nix
   ];
 }
