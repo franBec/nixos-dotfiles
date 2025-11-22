@@ -12,7 +12,6 @@ let
     "git"
     "google-chrome"
     "komorebi"
-    "mesa-demos"
     "musescore"
     "nodejs"
     "pnpm"
