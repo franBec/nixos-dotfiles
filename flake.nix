@@ -44,14 +44,14 @@
           commonHomeManagerModule
         ];
       };
-/*      "Lenovo-ideapad-L340-15IRH" = nixpkgs.lib.nixosSystem {
+      "Lenovo-ideapad-L340-15IRH" = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           ./hosts/Lenovo-ideapad-L340-15IRH/configuration.nix
           home-manager.nixosModules.home-manager
           commonHomeManagerModule
         ];
-      };*/
+      };
     };
   };
 }
