@@ -17,6 +17,7 @@
       ../../system-modules/networking.nix
       ../../system-modules/nvidia.nix
       ../../system-modules/services-xserver.nix
+      ../../system-modules/users.nix
       ../../system-modules/zram-swap.nix
     ];
 
@@ -25,15 +26,6 @@
   security.rtkit.enable = true;
   services.printing.enable = true;
   programs.dconf.enable = true;
-
-  programs.zsh.enable = true;
-
-  users.users.pollito = {
-    isNormalUser = true;
-    description = "pollito";
-    extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh; 
-  };
 
   nixpkgs.config.allowUnfree = true;
 

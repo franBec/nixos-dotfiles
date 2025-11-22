@@ -7,7 +7,4 @@
     { domain = "@audio"; type = "-"; item = "memlock"; value = "unlimited"; }
     { domain = "@audio"; type = "-"; item = "nice"; value = "-19"; }
   ];
-
-  # Ensure user is in audio group (already done, but good to be explicit)
-  users.users.pollito.extraGroups = [ "audio" ];
 }
