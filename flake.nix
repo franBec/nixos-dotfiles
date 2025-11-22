@@ -22,27 +22,36 @@
       inherit system;
       config.allowUnfree = true;
     };
+
+    commonHomeManagerModule = {
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        backupFileExtension = "backup";
+        extraSpecialArgs = { inherit pkgs-unstable; };
+        users.pollito = {
+          imports = [ ./home-manager/home.nix ];
+        };
+      };
+    };
   in {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = [
-        ./hosts/Lenovo-ideapad-320-15IKB/configuration.nix
-        home-manager.nixosModules.home-manager
-
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            backupFileExtension = "backup";
-
-            extraSpecialArgs = { inherit pkgs-unstable; };
-
-            users.pollito = {
-              imports = [ ./home-manager/home.nix ];
-            };
-          };
-        }
-      ];
+    nixosConfigurations = {
+      "Lenovo-ideapad-320-15IKB" = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./hosts/Lenovo-ideapad-320-15IKB/configuration.nix
+          home-manager.nixosModules.home-manager
+          commonHomeManagerModule
+        ];
+      };
+/*      "Lenovo-ideapad-L340-15IRH" = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./hosts/Lenovo-ideapad-L340-15IRH/configuration.nix
+          home-manager.nixosModules.home-manager
+          commonHomeManagerModule
+        ];
+      };*/
     };
   };
 }

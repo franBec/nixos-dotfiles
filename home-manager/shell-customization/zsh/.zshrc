@@ -1,4 +1,3 @@
-alias nrs="sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos"
 fastfetch
 
 nixosInfo() {
@@ -74,4 +73,9 @@ lv2Info() {
     ) > "$LOG_FILE"
     echo "LV2 plugin data successfully exported to $LOG_FILE"
     echo "Use 'cat $LOG_FILE' or 'bat $LOG_FILE' to view."
+}
+
+nrs() {
+  local host=$(hostname)
+  sudo nixos-rebuild switch --flake "$HOME/nixos-dotfiles#$host" "$@"
 }
