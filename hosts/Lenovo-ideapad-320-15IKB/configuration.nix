@@ -15,7 +15,7 @@
       ../../system-modules/keyring.nix
       ../../system-modules/ly.nix
       ../../system-modules/networking.nix
-      ../../system-modules/nvidia.nix
+      ../../system-modules/nvidia-geforce-940mx.nix
       ../../system-modules/services-xserver.nix
       ../../system-modules/users.nix
       ../../system-modules/zram-swap.nix
