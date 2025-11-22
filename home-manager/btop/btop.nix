@@ -11,8 +11,8 @@
   };
 
   # 2. Deploy the custom theme file to the required 'themes' subdirectory
-  home.file.".config/btop/themes/Catppuccin-Mocha.theme" = {
-    source = ./themes/Catppuccin-Mocha.theme;
-    target = ".config/btop/themes/Catppuccin-Mocha.theme";
+  home.file.".config/btop/themes/Adapta-Nokto.theme" = {
+    source = ./themes/Adapta-Nokto.theme;
+    target = ".config/btop/themes/Adapta-Nokto.theme";
   };
 }

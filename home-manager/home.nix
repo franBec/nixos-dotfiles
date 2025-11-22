@@ -5,13 +5,22 @@ let
   simpleModules = [
     "alacritty"
     "ani-cli"
+    "audio-utils"
     "btop"
-    "google-chrome"
+    "daw-and-lv2-plugins"
+    "gemini-cli"
     "git"
+    "google-chrome"
     "komorebi"
+    "mesa-demos"
+    "musescore"
+    "nodejs"
+    "pnpm"
     "rofi"
     "shell-customization"
     "ssh"
+    "sublime3"
+    "webstorm"
   ];
 
   simpleImports = map (name: ./${name}/${name}.nix) simpleModules;
@@ -22,13 +31,6 @@ in
   home.stateVersion = "25.05";
 
   imports = simpleImports ++ [
-    ./audio-tools/audio-production.nix
-    ./audio-tools/musescore/musescore.nix
-    ./audio-tools/utils.nix
-    ./performance-test/mesa-demos.nix
-    ./software-development/gemini-cli.nix
-    ./software-development/js.nix
-    ./software-development/webstorm.nix
     ./utils.nix
   ];
 }
