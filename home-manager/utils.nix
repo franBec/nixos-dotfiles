@@ -6,6 +6,8 @@
     busybox
     dnslookup
     fastfetch
+    flameshot
+    mesa-demos
     nix-prefetch-github
     sublime3
     toybox
