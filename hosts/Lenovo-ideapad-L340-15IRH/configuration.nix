@@ -10,6 +10,8 @@
   environment.systemPackages = with pkgs; [
     wget
   ];
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
   networking.hostName = "Lenovo-ideapad-L340-15IRH";
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
