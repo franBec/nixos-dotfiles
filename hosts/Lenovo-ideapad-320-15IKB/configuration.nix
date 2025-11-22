@@ -4,6 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
+      ../../system-modules/boot-loader.nix
       ../../system-modules/common.nix
       ../../system-modules/cpu-performance.nix
       ../../system-modules/io-scheduler.nix
