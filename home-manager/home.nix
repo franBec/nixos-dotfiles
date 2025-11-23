@@ -13,7 +13,7 @@ let
     "git"
     "google-chrome"
     "komorebi"
-#    "musescore"
+    "musescore"
     "nodejs"
     "pnpm"
     "rofi"
