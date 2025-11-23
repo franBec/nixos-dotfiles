@@ -5,6 +5,7 @@
     [
       ./hardware-configuration.nix
       ../../system-modules/common.nix
+      ../../system-modules/nvidia-geforce-gtx-1650.nix
       ../../system-modules/realtek-rtl8821ce-driver.nix
     ];
 
