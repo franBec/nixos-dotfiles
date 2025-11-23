@@ -9,8 +9,8 @@
     flameshot
     mesa-demos
     nix-prefetch-github
+    pciutils
     sublime3
-    toybox
     tree
     xclip
     zip
