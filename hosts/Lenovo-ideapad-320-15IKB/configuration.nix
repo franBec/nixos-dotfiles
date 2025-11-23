@@ -9,7 +9,6 @@
       ../../system-modules/cpu-performance.nix
       ../../system-modules/io-scheduler.nix
       ../../system-modules/nvidia-geforce-940mx.nix
-      ../../system-modules/zram-swap.nix
     ];
 
   networking.hostName = "Lenovo-ideapad-320-15IKB";

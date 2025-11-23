@@ -14,5 +14,6 @@
     ./networking.nix
     ./services-xserver.nix
     ./users.nix
+    ./zram-swap.nix
   ];
 }
