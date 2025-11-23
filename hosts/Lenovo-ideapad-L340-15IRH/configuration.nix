@@ -10,8 +10,14 @@
   environment.systemPackages = with pkgs; [
     wget
   ];
-  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot = {
+    enable = true;
+    editor = false;
+    extraInstallCommands = ''
+      echo "Not running bootctl update because ESP already has a newer system-boot."
+    '';
+  };
   networking.hostName = "Lenovo-ideapad-L340-15IRH";
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
