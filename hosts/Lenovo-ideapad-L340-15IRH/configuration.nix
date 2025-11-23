@@ -5,6 +5,7 @@
     [
       ./hardware-configuration.nix
       ../../system-modules/common.nix
+      ../../system-modules/realtek-rtl8821ce-driver.nix
     ];
 
   environment.systemPackages = with pkgs; [
