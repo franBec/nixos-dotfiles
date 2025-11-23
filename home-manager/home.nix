@@ -7,6 +7,7 @@ let
     "ani-cli"
     "audio-utils"
     "btop"
+    "cinnamon-keybindings"
     "daw-and-lv2-plugins"
     "gemini-cli"
     "git"
