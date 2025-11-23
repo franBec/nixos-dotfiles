@@ -12,9 +12,6 @@
       ../../system-modules/zram-swap.nix
     ];
 
-  environment.systemPackages = with pkgs; [
-    wget
-  ];
   networking.hostName = "Lenovo-ideapad-320-15IKB";
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;

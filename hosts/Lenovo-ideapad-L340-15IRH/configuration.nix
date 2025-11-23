@@ -9,9 +9,6 @@
       ../../system-modules/realtek-rtl8821ce-driver.nix
     ];
 
-  environment.systemPackages = (config.environment.systemPackages or []) ++ [
-    pkgs.wget
-  ];
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot = {
     enable = true;
