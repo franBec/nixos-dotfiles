@@ -1,10 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  environment.systemPackages = [
-    pkgs.glxinfo
-    pkgs.vulkan-tools
-    pkgs.nvidia-settings
+  environment.systemPackages = with pkgs; [
+   glxinfo
+   vulkan-tools
   ];
   hardware = {
     graphics = {
