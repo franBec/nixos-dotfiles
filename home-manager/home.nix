@@ -16,6 +16,7 @@ let
     "nodejs"
     "pnpm"
     "rofi"
+    "rofimoji"
     "shell-customization"
     "ssh"
     "sublime3"
