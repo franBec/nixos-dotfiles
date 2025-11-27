@@ -8,6 +8,10 @@
   ];
   boot.kernelParams = [ "pcie_aspm=force" ];
   services.thermald.enable = true;
+  boot.extraModprobeConfig = ''
+    options nvidia "NVreg_DynamicPowerManagement=0x02"
+  '';
+
   hardware = {
     graphics = {
       enable = true;
@@ -17,6 +21,7 @@
       modesetting.enable = true;
       nvidiaSettings = true;
       open = false;
+      package = config.boot.kernelPackages.nvidiaPackages.production;
       powerManagement.enable = true;
       powerManagement.finegrained = true;
       prime = {
@@ -29,17 +34,13 @@
       };
     };
   };
+
   services.xserver.videoDrivers = [ "nvidia" ];
 
   # Udev rules to remove Nvidia Audio/USB to allow deep sleep
   services.udev.extraRules = ''
-    # Remove NVIDIA USB xHCI Host Controller devices, if present
     ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
-
-    # Remove NVIDIA USB Type-C UCSI devices, if present
     ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{power/control}="auto", ATTR{remove}="1"
-
-    # Remove NVIDIA Audio devices, if present
     ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"
   '';
 }
