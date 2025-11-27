@@ -4,7 +4,10 @@
   environment.systemPackages = with pkgs; [
    glxinfo
    vulkan-tools
+   lm_sensors
   ];
+  boot.kernelParams = [ "pcie_aspm=force" ];
+  services.thermald.enable = true;
   hardware = {
     graphics = {
       enable = true;
