@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     sublime3
+    sublime_merge
   ];
 
   home.file.".config/sublime-text-3/Packages/User/Adapta-Nokto.sublime-color-scheme".text = ''
