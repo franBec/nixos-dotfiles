@@ -20,6 +20,7 @@ let
     "rofimoji"
     "shell-customization"
     "ssh"
+    "steam"
     "sublime3"
     "webstorm"
   ];
