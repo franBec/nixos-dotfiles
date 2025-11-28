@@ -6,8 +6,12 @@
    vulkan-tools
    lm_sensors
   ];
-  boot.kernelParams = [ "pcie_aspm=force" ];
-  services.thermald.enable = true;
+
+ boot.kernelParams = [
+    "pcie_aspm=force"
+    "acpi_osi=!"
+    "acpi_osi=\"Windows 2015\""
+  ];
   boot.extraModprobeConfig = ''
     options nvidia "NVreg_DynamicPowerManagement=0x02"
   '';
@@ -34,13 +38,11 @@
       };
     };
   };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  # Udev rules to remove Nvidia Audio/USB to allow deep sleep
+  services.thermald.enable = true;
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
     ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{power/control}="auto", ATTR{remove}="1"
     ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"
   '';
+  services.xserver.videoDrivers = [ "nvidia" ];
 }
