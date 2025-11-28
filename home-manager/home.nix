@@ -5,6 +5,7 @@ let
   simpleModules = [
     "alacritty"
     "ani-cli"
+    "anydesk"
     "audio-utils"
     "btop"
     "daw-and-lv2-plugins"
