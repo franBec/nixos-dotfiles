@@ -12,7 +12,6 @@ let
     "gemini-cli"
     "git"
     "google-chrome"
-    "komorebi"
     "musescore"
     "nodejs"
     "pnpm"
