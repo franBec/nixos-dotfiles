@@ -15,6 +15,7 @@ let
     "musescore"
     "nodejs"
     "pnpm"
+    "python"
     "rofi"
     "rofimoji"
     "shell-customization"
