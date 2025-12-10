@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    python315
+    python3
   ];
 }
