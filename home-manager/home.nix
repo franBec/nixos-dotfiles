@@ -12,6 +12,7 @@ let
     "gemini-cli"
     "git"
     "google-chrome"
+    "idea"
     "musescore"
     "nodejs"
     "pnpm"
