@@ -5,15 +5,14 @@
     tree
   ];
   
-  programs.zsh.enable = true;
-  home.sessionVariables.SHELL = "${pkgs.zsh}/bin/zsh";
-  home.file.".zshrc" = {
-    text = ''
+  programs.zsh = {
+    enable = true;
+    initExtra = ''
       eval "$(${pkgs.starship}/bin/starship init zsh)"
       ${builtins.readFile ./zsh/.zshrc}
     '';
-    recursive = false;
   };
+  home.sessionVariables.SHELL = "${pkgs.zsh}/bin/zsh";
 
   programs.starship = {
     enable = true;
