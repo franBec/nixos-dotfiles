@@ -15,6 +15,7 @@ let
     "idea"
     "musescore"
     "nodejs"
+    "opencode"
     "pnpm"
     "python"
     "rofi"
