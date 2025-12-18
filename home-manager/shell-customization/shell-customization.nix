@@ -7,7 +7,7 @@
   
   programs.zsh = {
     enable = true;
-    initExtra = ''
+    initContent = ''
       eval "$(${pkgs.starship}/bin/starship init zsh)"
       ${builtins.readFile ./zsh/.zshrc}
     '';

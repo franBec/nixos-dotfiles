@@ -6,14 +6,16 @@
 
   programs.git = {
     enable = true;
-    extraConfig = {
+    settings = {
+      user = {
+        name = "FranBec";
+        email = "franbecvort@gmail.com";
+      };
       url = {
         "git@github.com:" = {
           insteadOf = "https://github.com/";
         };
       };
     };
-    userName = "FranBec";
-    userEmail = "franbecvort@gmail.com";
   };
 }
