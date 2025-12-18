@@ -9,7 +9,7 @@
         forwardX11 = false;
         forwardX11Trusted = false;
         identitiesOnly = false;
-        sendEnv = "LANG LC_*";
+        sendEnv = [ "LANG" "LC_*" ];
       };
       "github.com" = {
         user = "git";
