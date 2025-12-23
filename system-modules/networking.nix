@@ -5,6 +5,19 @@
     networkmanager = {
       dns = "none";
       enable = true;
+      settings = {
+        connectivity = {
+          enabled = false;
+        };
+        device = {
+          wifi = {
+            scan-rand-mac-address = true;
+          };
+        };
+        connection = {
+          "wifi.cloned-mac-address" = "stable";
+        };
+      };
     };
   };
 }
