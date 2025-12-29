@@ -24,7 +24,6 @@ let
     "ssh"
     "sublime3"
     "webstorm"
-    "zed"
   ];
 
   simpleImports = map (name: ./${name}/${name}.nix) simpleModules;
