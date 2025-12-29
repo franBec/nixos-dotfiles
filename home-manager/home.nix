@@ -13,6 +13,7 @@ let
     "git"
     "google-chrome"
     "idea"
+    "java"
     "musescore"
     "nodejs"
     "opencode"
