@@ -25,6 +25,7 @@ let
     "shell-customization"
     "ssh"
     "sublime3"
+    "tor-browser"
     "webstorm"
   ];
 
