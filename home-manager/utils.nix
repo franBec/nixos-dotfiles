@@ -7,6 +7,7 @@
     dnslookup
     fastfetch
     flameshot
+    jq
     mesa-demos
     nix-prefetch-github
     pciutils
