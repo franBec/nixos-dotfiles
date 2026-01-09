@@ -13,6 +13,7 @@
     pciutils
     sublime3
     tree
+    w3m
     xclip
     zip
   ];
