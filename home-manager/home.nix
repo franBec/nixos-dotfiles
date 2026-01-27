@@ -27,6 +27,7 @@ let
     "sublime3"
     "tor-browser"
     "webstorm"
+    "zed"
   ];
 
   simpleImports = map (name: ./${name}/${name}.nix) simpleModules;
